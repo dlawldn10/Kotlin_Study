@@ -1,4 +1,4 @@
-package com.ivy.kotlin_study.lec10;
+package com.ivy.kotlin_study.lec10.Java;
 
 public abstract class JavaAnimal {
 

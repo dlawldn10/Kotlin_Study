@@ -1,4 +1,4 @@
-package com.ivy.kotlin_study.lec10;
+package com.ivy.kotlin_study.lec10.Java;
 
 public final class JavaPenguin extends JavaAnimal implements JavaSwimable, JavaFlyable {
 
@@ -23,6 +23,11 @@ public final class JavaPenguin extends JavaAnimal implements JavaSwimable, JavaF
   public void act() {
     JavaSwimable.super.act();
     JavaFlyable.super.act();
+  }
+
+  @Override
+  public void fly() {
+    System.out.println("추상 메소드 fly");
   }
 
 }
