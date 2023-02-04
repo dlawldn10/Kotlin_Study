@@ -1,6 +1,8 @@
 package com.ivy.kotlin_study
 
+import java.util.*
 import kotlin.math.ceil
+import kotlin.math.max
 import kotlin.math.pow
 
 
@@ -344,7 +346,6 @@ import kotlin.math.pow
 
 
 //fun solution(n: Int, numlist: IntArray): IntArray {
-//    // 필터 조건을 충족하는 아이들을 제거해준다
 //    return numlist.filter { it % n == 0 }.toIntArray()
 //}
 
@@ -394,8 +395,52 @@ import kotlin.math.pow
 //}
 
 
+//fun solution(my_string: String, num1: Int, num2: Int): String {
+//    val myString = my_string.toCharArray()
+//    val tmp = myString[num1]
+//    myString[num1] = myString[num2]
+//    myString[num2] = tmp
+//    return myString.joinToString("")
+//
+//    // 또는
+//    return my_string.toList().let {
+//        Collections.swap(it, num1, num2)
+//        it.joinToString("")
+//    }
+//}
 
 
+//fun solution(numbers: IntArray): Int {
+////    var max = -100000000
+//    var max = Integer.MIN_VALUE
+//    for ((i, num) in numbers.withIndex()){
+//        for ((j, num2) in numbers.withIndex()){
+//            if (i == j) continue
+//            if (num*num2 > max) max = num*num2
+//        }
+//    }
+//    return max
+//
+//    // 또는
+//    val sorted = numbers.sorted()
+//    return max(sorted[0] * sorted[1], sorted[sorted.lastIndex] * sorted[sorted.lastIndex - 1])
+//}
+
+
+//fun solution(age: Int): String {
+////    var answer: String = ""
+////    var alphabet = arrayOf("a", "b", "c", "d", "e", "f", "g", "h", "i", "j")
+////    val ageString = age.toString().toCharArray()
+////    for (i in ageString){
+////        answer += alphabet[i.digitToInt()]
+////    }
+////    return answer
+//
+//    // 또는
+//    return age.toString().toCharArray().joinToString ("") {
+//        (it + 49).toString()
+//    }
+//}
 
 
 
