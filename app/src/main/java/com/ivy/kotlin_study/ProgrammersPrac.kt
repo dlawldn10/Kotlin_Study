@@ -1,9 +1,6 @@
 package com.ivy.kotlin_study
 
 import java.util.*
-import kotlin.math.ceil
-import kotlin.math.max
-import kotlin.math.pow
 
 
 //fun solution(numbers: IntArray): Double {
@@ -443,29 +440,108 @@ import kotlin.math.pow
 //}
 
 
+//fun solution(n: Int): Int {
+//    var i = n
+//    while (true){
+//        if (i*6 % n == 0) break
+//        i++
+//    }
+//    return i
+//}
+
+
+//fun solution(n: Int): IntArray {
+//    var answer = mutableListOf<Int>()
+//    for (i in 1..n){
+//        if (i in answer) continue
+//        if (n % i == 0) answer.add(i)
+//    }
+//    return answer.toIntArray()
+//
+//    // 또는
+//    return (1..n).filter { n % it == 0 }.toIntArray()
+//}
+
+
+//fun solution(order: Int): Int {
+//    val orderStr = order.toString()
+//    return orderStr.count { it == '3' || it == '6' || it == '9' }
+//}
+
+
+//fun solution(num: Int, k: Int): Int {
+//    val numStr = num.toString().map { it.digitToInt() }
+////    for ((idx, value) in numStr.withIndex()){
+////        if (k == value) return idx+1
+////    }
+////    return -1
+//
+//    return if (k in numStr) numStr.indexOf(k)+1 else -1
+//
+//}
+
+//fun solution(my_string: String): String {
+//    return my_string.map { it.lowercaseChar() }.sorted().joinToString("")
+//    // 또는
+//    return my_string.lowercase().toCharArray().sorted().joinToString("")
+//}
+
+
+//fun solution(n: Int): Int {
+//    var answer: Int = 0
+//    for (i in 1..n){
+//        if((1..i).count { i % it == 0} >= 3) answer++
+//    }
+//    return answer
+//
+//    // 또는
+//    return (1..n).filter { i -> (1..i).filter { i % it == 0 }.size > 2 }.size
+//}
+
+
+//fun solution(letter: String): String {
+//    val morse = mapOf(".-"  to "a", "-..."  to "b", "-.-." to "c", "-.." to "d", "." to "e", "..-." to "f", "--." to "g",
+//        "...." to "h", ".." to "i", ".---" to "j", "-.-" to "k", ".-.." to "l", "--" to "m", "-." to "n", "---" to "o", ".--." to "p",
+//        "--.-" to "q", ".-." to "r", "..." to "s", "-" to "t", "..-" to "u", "...-" to "v", ".--" to "w", "-..-" to "x", "-.--" to "y", "--.." to "z"
+//    )
+//    val words = letter.split(" ")
+//    return words.map { morse[it] }.joinToString("")
+//
+//}
+
+
+//fun solution(my_string: String): String {
+//    return my_string.toCharArray().distinctBy { it }.joinToString("")
+//}
 
 
 
+//fun solution(before: String, after: String): Int {
+//    return if (before.toCharArray().sorted() == after.toCharArray().sorted()) 1 else 0
+//}
 
 
+//fun solution(n: Int): Int {
+//    var i=0
+//    var acc = 1
+//    while (acc < n){
+//        i++
+//        acc = 1
+//        for (number in 1..i) {
+//            acc *= number
+//            if (acc > n) return i
+//        }
+//    }
+//    return i
+//
+//
+//
+//}
 
+// 또는
+fun solution(n: Int) = (2..n).find { n < factorial(it) }?.dec() ?: n
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+private tailrec fun factorial(n: Int, run: Int = 1): Int = if (n == 1) run else factorial(n - 1, run * n)
 
 
 
