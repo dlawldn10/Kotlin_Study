@@ -1,6 +1,8 @@
 package com.ivy.kotlin_study
 
 import java.util.*
+import kotlin.math.abs
+import kotlin.math.absoluteValue
 
 
 //fun solution(numbers: IntArray): Double {
@@ -539,11 +541,69 @@ import java.util.*
 //}
 
 // 또는
-fun solution(n: Int) = (2..n).find { n < factorial(it) }?.dec() ?: n
-
-private tailrec fun factorial(n: Int, run: Int = 1): Int = if (n == 1) run else factorial(n - 1, run * n)
-
-
+//fun solution(n: Int) = (2..n).find { n < factorial(it) }?.dec() ?: n
+//
+//private tailrec fun factorial(n: Int, run: Int = 1): Int = if (n == 1) run else factorial(n - 1, run * n)
 
 
+// 2차원 배열 선언하기
+// Array(행의 크기, {IntArray(열의 크기, {초기화 값})}
+//fun solution(num_list: IntArray, n: Int): Array<IntArray> {
+//    var answer: Array<IntArray> = Array(num_list.size/n) { IntArray(n) { 0 } }
+//    var num = 0
+//    for (i in answer.indices){
+//        for (j in answer[i].indices){
+//            answer[i][j] = num_list[num]
+//            num++
+//        }
+//    }
+//
+//    return answer
+//
+//}
 
+// 또는
+//fun solution(num_list: IntArray, n: Int)= num_list.toList().chunked(n)
+
+
+//fun solution(array: IntArray, n: Int): Int {
+//    var answer: Int = 0
+//    array.sort()
+//    var sub = Integer.MIN_VALUE
+//    for (i in array){
+//        if (abs(i-n) < sub) {
+//            sub = abs(i-n)
+//            answer = i
+//        }
+//    }
+//    return answer
+//
+//}
+
+// 또는
+//fun solution(array: IntArray, n: Int) = array.sorted().minWithOrNull(compareBy { abs(it - n) })!!
+
+
+//fun solution(i: Int, j: Int, k: Int): Int {
+////    val tmpList = arrayListOf<Int>()
+////    for (num in i..j){
+////        tmpList.add(num)
+////    }
+////    var tmpStr = tmpList.joinToString("")
+////
+////    return tmpStr.count { it == k.digitToChar() }
+//
+//    // 더 간단하게
+//    return (i..j).joinToString("").count { it == k.digitToChar() }
+//}
+
+
+fun solution(emergency: IntArray): IntArray {
+    var answer: IntArray = intArrayOf()
+    var tmp = emergency.sortedDescending()
+    for (i in tmp){
+        answer.plus(tmp.indexOf(i))
+    }
+
+    return answer
+}
