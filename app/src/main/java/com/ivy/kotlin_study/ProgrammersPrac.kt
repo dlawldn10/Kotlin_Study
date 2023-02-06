@@ -597,13 +597,17 @@ import kotlin.math.absoluteValue
 //    return (i..j).joinToString("").count { it == k.digitToChar() }
 //}
 
-
-fun solution(emergency: IntArray): IntArray {
-    var answer: IntArray = intArrayOf()
-    var tmp = emergency.sortedDescending()
-    for (i in tmp){
-        answer.plus(tmp.indexOf(i))
-    }
-
-    return answer
-}
+//
+//fun solution(emergency: IntArray): IntArray {
+//    val answer = mutableListOf<Int>()
+//    val tmp = emergency.sortedDescending()
+//    println(tmp)
+//    for (i in emergency){
+//        answer.add(tmp.indexOf(i)+1)
+//    }
+//
+//    return answer.toIntArray()
+//
+//    // 또는
+//    return emergency.map { emergency.sortedDescending().indexOf(it) + 1 }.toIntArray()
+//}
