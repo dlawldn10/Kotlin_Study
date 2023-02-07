@@ -1,9 +1,5 @@
 package com.ivy.kotlin_study
 
-import java.util.*
-import kotlin.math.abs
-import kotlin.math.absoluteValue
-
 
 //fun solution(numbers: IntArray): Double {
 //    return numbers.average()
@@ -611,3 +607,331 @@ import kotlin.math.absoluteValue
 //    // 또는
 //    return emergency.map { emergency.sortedDescending().indexOf(it) + 1 }.toIntArray()
 //}
+
+
+//fun solution(s: String): String {
+//    var tmp = mutableSetOf<Char>()
+//    for (i in s){
+//        if (s.count { it == i } == 1) tmp.add(i)
+//    }
+//    return tmp.sorted().joinToString("")
+//}
+
+
+//fun solution(my_string: String): Int {
+//    // 정규 표현식 객체 사용하기
+//    return my_string.split("[A-z]+".toRegex()).filter { it.isNotEmpty() }.sumOf { it.toInt() }
+//
+//    // 또는
+//    return my_string.split("[A-z]+".toRegex())
+//        .filter(String::isNotEmpty)
+//        .sumOf(String::toInt)
+//}
+
+
+//fun solution(bin1: String, bin2: String): String {
+//    // 진법 변환
+//    // ex) 2진수를 10진수로 바꾸기
+//    // Integer.parseInt(bin1, 2) -> 이렇게 쓰거나
+//    // bin1.toInt(2) -> 이렇게 쓸 수 있다.
+//    // String을 진법으로 표현하기
+//    // 숫자.toString(2) -> 2진수로 표현하기
+//    // 숫자.toString() -> 10진수로 표현하기
+//    // 숫자.toString(16) -> 16진수로 표현하기
+//    return Integer.toBinaryString(Integer.parseInt(bin1, 2)+Integer.parseInt(bin2, 2))
+//
+//    // 또는
+//    return (bin1.toInt(2) + bin2.toInt(2)).toString(2)
+//}
+
+
+
+//fun solution(array: IntArray): Int {
+//    return array.joinToString("").count{ it == '7'}
+//}
+
+
+//import java.util.*
+//fun solution(numbers: IntArray, k: Int): Int {
+//
+//    var answer: Int? = 0
+//    val queue : Queue<Int> = LinkedList()
+//    numbers.forEach { queue.add(it) }
+//
+//    // 큐 사용하기
+//    var i = 0
+//    while (true){
+//        answer = queue.poll()
+//        queue.add(answer)
+//        queue.add(queue.poll())
+//        i++
+//        if (i == k) break
+//    }
+//
+//    return answer ?: 0
+//
+//    // 공식으로 풀기
+//    return (1..k).map { numbers }.flatMap { it.toList() }[2 * (k - 1)]
+//
+//
+//}
+
+
+//fun solution(n: Int): IntArray {
+//    var answer = mutableListOf<Int>()
+//    var tmp = n
+//    for (i in 2..n){
+//        while (tmp % i == 0){
+//            tmp /= i
+//            answer.add(i)
+//        }
+//    }
+//    return answer.distinct().sorted().toIntArray()
+//}
+
+
+//// 둘만의 암호
+//// 3:50
+//// 4:29
+//fun solution(s: String, skip: String, index: Int): String {
+//    var newSkip = ('a'..'z').filter { it !in skip }
+//    var tmp = s.toCharArray()
+//    for (idx in tmp.indices){
+//        tmp[idx] = newSkip[(newSkip.indexOf(tmp[idx])+index)%newSkip.size]
+//    }
+//    return tmp.joinToString("")
+//}
+
+
+//// 개인정보 수집 유효기간
+//fun solution(today: String, terms: Array<String>, privacies: Array<String>): IntArray {
+//    val answer = mutableListOf<Int>()
+//
+//    val todayTotal = totalDay(today)
+//    val map = hashMapOf<String, Int>()
+//
+//    for (i in terms.indices) {
+//        val token = terms[i].split(" ")
+//        map[token[0]] = token[1].toInt()
+//    }
+//
+//    for (i in privacies.indices) {
+//        val token = privacies[i].split(" ")
+//
+//        val date = token[0]
+//        val type = token[1]
+//
+//        val dateTotal = totalDay(date)
+//        val month = map[type] ?: 0
+//        val changedDay = month * 28
+//
+//        if (todayTotal >= (dateTotal + changedDay)) {
+//            answer.add(i+1)
+//        }
+//    }
+//
+//    return answer.toIntArray()
+//}
+//
+//
+//private fun totalDay(todayTotal: String): Int {
+//
+//    var sum = 0
+//    val token = todayTotal.split(".")
+//    val y = token[0]
+//    val m = token[1]
+//    val d = token[2]
+//
+//    sum += y.toInt() * 12 * 28
+//    sum += (m.toInt() - 1) * 28
+//    sum += d.toInt()
+//
+//    return sum
+//}
+
+
+//// 크기가 작은 부분 문자열
+//// 7:14
+//// 7:53
+//fun solution(t: String, p: String): Int {
+////    var answer = arrayListOf<Long>()
+////    for (i in 0..t.length-p.length){
+////        answer.add(t.slice(i until i+p.length).toLong())
+////    }
+////    return answer.count { it <= p.toLong() }
+//
+//    // 또는
+//    var answer = 0
+//
+//    for (i in 0..t.length - p.length) {
+//        val sub = t.substring(i, i + p.length)
+//        if (p.toLong() >= sub.toLong()) {
+//            answer++
+//        }
+//    }
+//
+//    return answer
+//}
+
+
+//// 가장 가까운 같은 글자
+//// 7:55
+//// 8:32
+//fun solution(s: String): IntArray {
+//    var tmp = mutableListOf<Char>()
+//    var answer = Array(s.length) { -1 }
+//    var idx = 0
+//    var pt: Char
+//    for (i in s.indices){
+//        pt = s[i]
+//        idx = i
+//        if (s[i] in tmp) continue
+//        tmp.add(s[i])
+//        for (j in (i+1 until s.length)){
+//            if (pt == s[j]){
+//                answer[j] = (j-idx)
+//                idx = j
+//            }
+//        }
+//    }
+//    return answer.toIntArray()
+//    또는
+//    return s.withIndex().map { (i, c) -> s.slice(0 until i).lastIndexOf(c).let { if (it >= 0) i - it else -1 } }
+//}
+
+
+//// 문자열 나누기
+//// 8:42
+//// 9:28
+//fun solution(s: String): Int {
+//    var answer: Int = 0
+//    var sameCnt = 0
+//    var otherCnt = 0
+//    var pt: Char
+//    var i = 0
+//    while (true){
+//        if (i == s.length-1) {
+//            answer += 1
+//            return answer
+//        }
+//        pt = s[i]
+//        for (j in i until s.length){
+//            if (pt == s[j]){
+//                sameCnt++
+//            }else{
+//                otherCnt++
+//            }
+//
+//            if (sameCnt == otherCnt) {
+//                answer++
+//                i = j+1
+//                sameCnt = 0
+//                otherCnt = 0
+//                break
+//            }
+//
+//            if (sameCnt != otherCnt && j == s.length-1){
+//                return answer
+//            }
+//
+//        }
+//
+//    }
+//
+//    return answer
+//}
+
+
+//// 귤 고르기
+//// 9:31
+//// 10:00
+//fun solution(k: Int, tangerine: IntArray): Int {
+//
+////    var distinctTan = tangerine.distinct()
+////    var tanCntList = arrayListOf<Int>()
+////    for (tan in distinctTan){
+////        tanCntList.add(tangerine.count { it == tan })
+////    }
+////
+////    var tanCnt = 0
+////    tanCntList.sortDescending()
+////    for ((idx, value) in tanCntList.withIndex()){
+////        tanCnt += value
+////        if (tanCnt >= k){
+////            return idx+1
+////        }
+////    }
+////
+////    return 0
+//
+//    // 또는
+//    var answer = 0
+//    var limit = 0
+//    tangerine.groupBy { it }.toList().sortedByDescending { it.second.size }.forEach {
+//        if (limit >= k){
+//            return answer
+//        }
+//        limit += it.second.size
+//        answer++
+//    }
+//
+//    return answer
+//}
+//
+//// 이건 안썼음.
+//// 조합 Combination 구하는 코드
+////fun combination(result: MutableList<MutableList<Int>>, target : Int, temp : MutableList<Int>, cur : Int, start : Int, end : Int) {
+////    // 만드려는 조합 리스트의 길이와 같으면 해당 값 추가 후 종료
+////    if (cur == target) {
+////        result.add(temp)
+////        return
+////    }
+////    else {
+////        // 재귀를 통해 시작 인덱스부터 종료 인덱스까지 순차적으로 실행시킴.
+////        for (i in start until end) {
+////            var temp = temp
+////            temp.add(i)
+////            combination(result, target, temp, cur+1, i+1, end)
+////        }
+////    }
+////}
+//
+
+
+// 무인도 여행
+// -> 다음에
+
+
+// 네트워크
+class Solution {
+    fun solution(n: Int, computers: Array<IntArray>): Int {
+        var answer = 0
+        val visited = mutableListOf<Int>()
+        for (v in 0 until n) {
+            if (!visited.contains(v)) {
+                dfs(v, computers, visited)
+                answer++
+            }
+        }
+        return answer
+    }
+
+    fun dfs(v : Int, computers : Array<IntArray>, visited : MutableList<Int>) {
+        visited.add(v)
+        computers[v].forEachIndexed { next, connected ->
+            if (connected == 1 && !visited.contains(next))
+                dfs(next, computers, visited)
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
