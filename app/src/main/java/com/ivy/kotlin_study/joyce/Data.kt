@@ -1,4 +1,4 @@
-package com.ivy.kotlin_study
+package com.ivy.kotlin_study.joyce
 
 data class Ticket(
     val companyName: String,
@@ -36,7 +36,7 @@ fun main(){
 //    data class가 아닌 그냥 class로 생성할 경우 프린트하면 그냥 주소값이 나옴.
 //    출력 결과:
 //    Ticket(companyName=koreanAir, name=jiwooLim, date=2022-12-30, seatNumber=14)
-//    com.ivy.kotlin_study.TicketNormal@4783da3f
+//    com.ivy.kotlin_study.joyce.TicketNormal@4783da3f
     println(ticketA)
     println(ticketB)
 }

@@ -1,4 +1,4 @@
-package com.ivy.kotlin_study
+package com.ivy.kotlin_study.joyce
 
 
 //클래스와 다른 점 -> 다른 클래스 객체와 달리 딱 한번만 만들어짐. = Singleton Pattern
@@ -6,7 +6,7 @@ package com.ivy.kotlin_study
 object CarFactory{
     val cars = mutableListOf<Car>()
 
-    fun makeCar(horsePower: Int):Car{
+    fun makeCar(horsePower: Int): Car {
         val car = Car(horsePower)
         cars.add(car)
         return car

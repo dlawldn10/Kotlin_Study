@@ -1,4 +1,4 @@
-package com.ivy.kotlin_study
+package com.ivy.kotlin_study.joyce
 
 fun main(){
 //    1. 함수

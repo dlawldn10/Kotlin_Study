@@ -1,4 +1,4 @@
-package com.ivy.kotlin_study
+package com.ivy.kotlin_study.joyce
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

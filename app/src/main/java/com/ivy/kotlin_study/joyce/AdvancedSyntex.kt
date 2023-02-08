@@ -1,4 +1,4 @@
-package com.ivy.kotlin_study
+package com.ivy.kotlin_study.joyce
 
 // 1. Lambda
 // 마치 value 처럼 다룰 수 있는 익명 함수

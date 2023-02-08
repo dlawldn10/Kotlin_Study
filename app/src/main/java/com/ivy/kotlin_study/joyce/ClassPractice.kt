@@ -1,4 +1,4 @@
-package com.ivy.kotlin_study
+package com.ivy.kotlin_study.joyce
 
 //코틀린은 파일 이름이랑 클래스 이름이랑 일치하지 않아도됨.
 //여러 클래스를 한 파일에 넣을 수도 있다.
@@ -15,7 +15,7 @@ open class Human(val name: String = "Anonymous") {
     }
 
 //    부생성자를 정의할 수 있다.
-//    부생성자는 항상 this를 이요해서 주생성자의 위임을 받아야한다.
+//    부생성자는 항상 this를 이용해서 주생성자의 위임을 받아야한다.
     constructor(name: String, age: Int): this(name){
         println("my name is $name and $age years old")
     }

@@ -1,5 +1,7 @@
 package com.ivy.kotlin_study
 
+import java.util.*
+
 
 //fun solution(numbers: IntArray): Double {
 //    return numbers.average()
@@ -898,35 +900,116 @@ package com.ivy.kotlin_study
 //
 
 
-// 무인도 여행
-// -> 다음에
+
+//// 네트워크
+//class Solution {
+//    fun solution(n: Int, computers: Array<IntArray>): Int {
+//        var answer = 0
+//        val visited = mutableListOf<Int>()
+//        for (v in 0 until n) {
+//            if (!visited.contains(v)) {
+//                dfs(v, computers, visited)
+//                answer++
+//            }
+//        }
+//        return answer
+//    }
+//
+//    fun dfs(v : Int, computers : Array<IntArray>, visited : MutableList<Int>) {
+//        visited.add(v)
+//        computers[v].forEachIndexed { next, connected ->
+//            if (connected == 1 && !visited.contains(next))
+//                dfs(next, computers, visited)
+//        }
+//    }
+//}
 
 
-// 네트워크
-class Solution {
-    fun solution(n: Int, computers: Array<IntArray>): Int {
-        var answer = 0
-        val visited = mutableListOf<Int>()
-        for (v in 0 until n) {
-            if (!visited.contains(v)) {
-                dfs(v, computers, visited)
-                answer++
-            }
-        }
-        return answer
-    }
+//// 뒤에있는 큰 수 찾기
+//// 9:08
+//// --
+//// 스택 쌓으면서 확인하는 문제
+//fun solution(numbers: IntArray): IntArray {
+//
+//    val answer: IntArray = IntArray(numbers.size) { -1 }
+//
+//    val stack = Stack<Int>()
+//
+//    for (i in numbers.indices) {
+//        if (stack.isEmpty() || numbers[i] <numbers[i-1]) stack.push(i)
+//        else {
+//            while (!stack.isEmpty() && numbers[stack.peek()] < numbers[i]) {
+//                answer[stack.pop()] = numbers[i]
+//            }
+//            stack.push(i)
+//        }
+//    }
+//
+//    return answer
+//}
 
-    fun dfs(v : Int, computers : Array<IntArray>, visited : MutableList<Int>) {
-        visited.add(v)
-        computers[v].forEachIndexed { next, connected ->
-            if (connected == 1 && !visited.contains(next))
-                dfs(next, computers, visited)
-        }
-    }
-}
 
-
-
+//// 무인도 여행
+//// dfs
+//// 11:41
+//// 12:17
+//class Solution {
+//    lateinit var mapArray : Array<CharArray>
+//    var sum = 0
+//    val dx = arrayOf(0, 1, 0, -1)
+//    val dy = arrayOf(-1, 0, 1, 0)
+//    var Y = 0
+//    var X = 0
+//
+//    fun solution(maps: Array<String>): IntArray {
+//        var answer= mutableListOf<Int>()
+//        Y = maps.size
+//        X = maps[0].length
+//        mapArray = Array(Y) { CharArray(X) { ' ' } }
+//
+//        for (row in maps.indices){
+//            for (col in maps[row].indices){
+//                mapArray[row][col] = maps[row][col]
+//            }
+//        }
+//
+//        for (row in mapArray.indices){
+//            for (col in mapArray[row].indices){
+//                if (mapArray[row][col].isDigit()) {
+//                    // 아직 안가본 양수
+//                    sum += mapArray[row][col].digitToInt()
+//                    dfs(row, col)
+//                    answer.add(sum)
+//                    sum = 0
+//
+//                }
+//            }
+//        }
+//
+//        if (answer.size == 0) answer.add(-1)
+//
+//        return answer.sorted().toIntArray()
+//    }
+//
+//    fun dfs(row: Int, col:Int){
+//        mapArray[row][col] = 'X'
+//
+//        for (k in 0..3){
+//            val ny = row + dy[k]
+//            val nx = col + dx[k]
+//            if (is_valid_coord(ny, nx) && mapArray[ny][nx].isDigit() && mapArray[ny][nx].digitToInt() > 0){
+//                sum += mapArray[ny][nx].digitToInt()
+//                dfs(ny, nx)
+//            }
+//        }
+//    }
+//
+//    fun is_valid_coord(y: Int, x: Int): Boolean{
+//        return (y in 0 until Y && x in 0 until X)
+//    }
+//
+//
+//}
 
 
 
