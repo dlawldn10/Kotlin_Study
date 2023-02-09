@@ -1,6 +1,8 @@
 package com.ivy.kotlin_study
 
 import java.util.*
+import kotlin.math.max
+import kotlin.math.min
 
 
 //fun solution(numbers: IntArray): Double {
@@ -1012,8 +1014,114 @@ import java.util.*
 //}
 
 
+//// 숫자 변환하기
+//// 3:08
+//// 5:27
+//// bfs
+//class Solution {
+//    fun solution(x: Int, y: Int, n: Int): Int {
+//        var answer = -1
+//        val queue: Queue<Array<Int>> = LinkedList()
+//        val visited = BooleanArray(1000001)
+//        queue.add(arrayOf(x, 0))
+//        visited[x] = true
+//
+//        while (queue.size > 0){
+//            val (x_, cnt) = queue.remove()
+//
+//            if (x_ == y) {
+//                answer = cnt
+//                break
+//            }
+//
+//            for (i in 0..2){
+//                val tmp = when (i){
+//                    0 -> x_ * 3
+//                    1 -> x_ * 2
+//                    else -> x_ + n
+//                }
+//
+//                if (tmp <= y && !visited[tmp]) {
+//                    visited[tmp] = true
+//                    queue.add(arrayOf(tmp, cnt+1))
+//                }
+//            }
+//
+//
+//        }
+//        return answer
+//    }
+//
+//
+//}
 
 
+// 호텔 대실
+// 8:38
+class Solution {
+    fun solution(book_time: Array<Array<String>>): Int {
+        // 틀린 코드
+//        var timeArray = Array(book_time.size) { Array(2) { 0 } }
+//        for (row in book_time.indices){
+//            for (col in 0..1){
+//                var token = book_time[row][col].split(":")
+//                var minute = token[0].toInt()*60 + token[1].toInt()
+//                timeArray[row][col] = minute
+//            }
+//        }
+//        timeArray.sortBy { it[0] }
+//        for (i in timeArray.indices){
+//            for (j in 0 until i){
+//                if (i != j && timeArray[i][0] >= timeArray[j][1]+10) {
+//                    timeArray[j][1] = Int.MAX_VALUE
+//                }
+//            }
+//        }
+//        return book_time.size-timeArray.count { it[1] == Int.MAX_VALUE }
+
+
+//        var timeArray = Array(book_time.size) { Array(2) { 0 } }
+//        for (row in book_time.indices){
+//            for (col in 0..1){
+//                var token = book_time[row][col].split(":")
+//                var minute = token[0].toInt()*60 + token[1].toInt() + 10
+//                timeArray[row][col] = minute
+//            }
+//        }
+//        timeArray.sortBy { it[0] }
+//        for ((start, end) in timeArray){
+//            println("${start} ${end}")
+//            timeArray.map { it[1] <= start }
+//        }
+//        return timeArray.
+
+        var answer=0
+        var timeArray: MutableList<Array<Int>> = mutableListOf()
+        for ((start, end) in book_time){
+            var token = start.split(":")
+            var minute = token[0].toInt()*60 + token[1].toInt()
+            timeArray.add(arrayOf(minute, 1))
+
+            token = end.split(":")
+            minute = token[0].toInt()*60 + token[1].toInt() + 10
+            timeArray.add(arrayOf(minute, 0))
+        }
+
+
+        var tmp = 0
+        for ((time, chk) in timeArray.sortedBy { it[0] }){
+            println("$time $chk")
+            tmp += when (chk) {
+                0 -> -1
+                else -> 1
+            }
+            answer = max(answer, tmp)
+        }
+        return answer
+
+
+    }
+}
 
 
 
