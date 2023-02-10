@@ -1,5 +1,7 @@
 package com.ivy.kotlin_study
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import java.util.*
 import kotlin.math.max
 import kotlin.math.min
@@ -1056,72 +1058,75 @@ import kotlin.math.min
 //}
 
 
-// 호텔 대실
-// 8:38
-class Solution {
-    fun solution(book_time: Array<Array<String>>): Int {
-        // 틀린 코드
-//        var timeArray = Array(book_time.size) { Array(2) { 0 } }
-//        for (row in book_time.indices){
-//            for (col in 0..1){
-//                var token = book_time[row][col].split(":")
-//                var minute = token[0].toInt()*60 + token[1].toInt()
-//                timeArray[row][col] = minute
-//            }
+//// 호텔 대실
+//// 8:38
+//// --
+//class Solution {
+//    @RequiresApi(Build.VERSION_CODES.N)
+//    fun solution(book_time: Array<Array<String>>): Int {
+//        // 틀린 코드
+////        var timeArray = Array(book_time.size) { Array(2) { 0 } }
+////        for (row in book_time.indices){
+////            for (col in 0..1){
+////                var token = book_time[row][col].split(":")
+////                var minute = token[0].toInt()*60 + token[1].toInt()
+////                timeArray[row][col] = minute
+////            }
+////        }
+////        timeArray.sortBy { it[0] }
+////        for (i in timeArray.indices){
+////            for (j in 0 until i){
+////                if (i != j && timeArray[i][0] >= timeArray[j][1]+10) {
+////                    timeArray[j][1] = Int.MAX_VALUE
+////                }
+////            }
+////        }
+////        return book_time.size-timeArray.count { it[1] == Int.MAX_VALUE }
+//
+//
+////        var timeArray = Array(book_time.size) { Array(2) { 0 } }
+////        for (row in book_time.indices){
+////            for (col in 0..1){
+////                var token = book_time[row][col].split(":")
+////                var minute = token[0].toInt()*60 + token[1].toInt() + 10
+////                timeArray[row][col] = minute
+////            }
+////        }
+////        timeArray.sortBy { it[0] }
+////        for ((start, end) in timeArray){
+////            println("${start} ${end}")
+////            timeArray.map { it[1] <= start }
+////        }
+////        return timeArray.
+//
+//        // 정답 코드
+//        val time = mutableListOf<Pair<Int, Int>>()
+//
+//        book_time.forEach {
+//            time.add(Pair(parseTime(it[0]), parseTime(it[1]) + 10))
 //        }
-//        timeArray.sortBy { it[0] }
-//        for (i in timeArray.indices){
-//            for (j in 0 until i){
-//                if (i != j && timeArray[i][0] >= timeArray[j][1]+10) {
-//                    timeArray[j][1] = Int.MAX_VALUE
-//                }
-//            }
+//        val sortedTime = time.sortedBy { it.first }
+//
+//        val use = PriorityQueue<Pair<Int, Int>>(compareBy { it.second })
+//        var answer = 0
+//
+//        for(i in book_time.indices) {
+//            while(use.isNotEmpty() && use.peek().second <= sortedTime[i].first) use.poll()
+//
+//            use.add(sortedTime[i])
+//            answer = maxOf(answer, use.size)
 //        }
-//        return book_time.size-timeArray.count { it[1] == Int.MAX_VALUE }
-
-
-//        var timeArray = Array(book_time.size) { Array(2) { 0 } }
-//        for (row in book_time.indices){
-//            for (col in 0..1){
-//                var token = book_time[row][col].split(":")
-//                var minute = token[0].toInt()*60 + token[1].toInt() + 10
-//                timeArray[row][col] = minute
-//            }
-//        }
-//        timeArray.sortBy { it[0] }
-//        for ((start, end) in timeArray){
-//            println("${start} ${end}")
-//            timeArray.map { it[1] <= start }
-//        }
-//        return timeArray.
-
-        var answer=0
-        var timeArray: MutableList<Array<Int>> = mutableListOf()
-        for ((start, end) in book_time){
-            var token = start.split(":")
-            var minute = token[0].toInt()*60 + token[1].toInt()
-            timeArray.add(arrayOf(minute, 1))
-
-            token = end.split(":")
-            minute = token[0].toInt()*60 + token[1].toInt() + 10
-            timeArray.add(arrayOf(minute, 0))
-        }
-
-
-        var tmp = 0
-        for ((time, chk) in timeArray.sortedBy { it[0] }){
-            println("$time $chk")
-            tmp += when (chk) {
-                0 -> -1
-                else -> 1
-            }
-            answer = max(answer, tmp)
-        }
-        return answer
-
-
-    }
-}
+//
+//        return answer
+//
+//
+//    }
+//
+//    fun parseTime(time: String): Int {
+//        val hm = time.split(":").map { it.toInt() }
+//        return hm[0] * 60 + hm[1]
+//    }
+//}
 
 
 
