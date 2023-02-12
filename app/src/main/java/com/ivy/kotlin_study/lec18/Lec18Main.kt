@@ -132,7 +132,7 @@ fun main() {
     val map3: Map<String, List<Long>> = fruits.groupBy({fruit -> fruit.name }, {fruit -> fruit.factoryPrice})
     println(map3)
 
-    // id 를 key로 출고가가 필요해요요
+    // id 를 key로 출고가가 필요해요
    val map4: Map<Long, Long> = fruits.associateBy({fruit -> fruit.id}, {fruit -> fruit.factoryPrice })
     println(map4)
 

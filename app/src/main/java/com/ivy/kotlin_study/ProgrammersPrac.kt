@@ -1,10 +1,6 @@
 package com.ivy.kotlin_study
 
-import android.os.Build
-import androidx.annotation.RequiresApi
-import java.util.*
-import kotlin.math.max
-import kotlin.math.min
+import kotlin.math.*
 
 
 //fun solution(numbers: IntArray): Double {
@@ -1129,5 +1125,186 @@ import kotlin.math.min
 //}
 
 
+// 폰켓몬
+// 2:16
+//class Solution {
+//    fun solution(nums: IntArray): Int {
+//        val hashSet = nums.toHashSet()
+//        val half = nums.size/2
+//        return if (hashSet.size > half) half else hashSet.size
+//    }
+//}
 
 
+// 완주하지 못한 선수
+// 2:32
+// 3:12
+//@RequiresApi(Build.VERSION_CODES.N)
+//fun main(){
+//    var participant = arrayOf("mislav", "stanko", "mislav", "ana")
+//    var completion = arrayOf("stanko", "ana", "mislav")
+//    println(solution(participant, completion))
+//}
+//
+//@RequiresApi(Build.VERSION_CODES.N)
+//fun solution(participant: Array<String>, completion: Array<String>): String {
+//    var answer = ""
+//    val hashMap = hashMapOf<String, Int>()
+//
+//    for (name in participant){
+//        hashMap[name] = hashMap.getOrDefault(name, 0) + 1
+//    }
+//
+//    for (name in completion){
+//        hashMap[name] = hashMap.getOrDefault(name, 0) -1
+//    }
+//
+//    for ((name, count) in hashMap){
+//        if (count != 0) {
+//            answer = name
+//            break
+//        }
+//    }
+//
+//    return answer
+//}
+
+
+// 위장
+// 3:13
+// fold로 곱하여 누적합 구하기
+//class Solution {
+//    fun solution(clothes: Array<Array<String>>): Int {
+//        var answer = clothes.groupBy { it[1] }.values.fold(1) {acc, i -> acc * (i.size + 1)} - 1
+//        return answer
+//    }
+//}
+
+
+
+// 베스트 앨범
+// 4:01
+// 5:23
+//class Solution {
+//    @RequiresApi(Build.VERSION_CODES.N)
+//    fun solution(genres: Array<String>, plays: IntArray): IntArray {
+//        var answer = mutableListOf<Int>()
+//        var musicList = mutableListOf<Music>()
+//        for ((idx, value ) in genres.withIndex()){
+//           musicList.add(Music(idx, value, plays[idx]))
+//        }
+//
+//        var map = musicList.groupBy { it.genre }.toList().sortedByDescending { it.second.sumOf { it.play } }.toMap()
+//
+//        for ((genre, list) in map){
+//            var tmp = list.sortedByDescending { it.play }
+//            answer.add(tmp?.get(0)!!.idx)
+//            if (tmp.size > 1) answer.add(tmp[1].idx)
+//        }
+//
+//        return answer.toIntArray()
+//    }
+//}
+//
+//data class Music(
+//    val idx: Int,
+//    val genre: String,
+//    val play: Int
+//)
+
+
+
+// k 번째 수
+// 5:33
+// 5:38
+//class Solution {
+//    fun solution(array: IntArray, commands: Array<IntArray>): IntArray {
+//        var answer = mutableListOf<Int>()
+//        for (cmd in commands){
+//            answer.add(array.slice(cmd[0]..cmd[1]).sorted()[cmd[2]-1])
+//        }
+//        return answer.toIntArray()
+//    }
+//}
+
+
+// 가장 큰 수
+// 5:38
+// --
+// 두개를 붙여서 서로 비교하는 방법을 써야했음.
+//class Solution {
+//    fun solution(numbers: IntArray): String {
+//        var answer = ""
+//        numbers.sortedWith(Comparator { o1, o2 -> "$o2$o1".compareTo("$o1$o2") }).forEach { answer += it }
+//        return if(answer.startsWith("0")) "0" else answer
+//    }
+//}
+
+
+
+// H-Index
+// 7:44
+// 8:40
+//class Solution {
+//    fun solution(citations: IntArray): Int {
+//
+//        citations.sort()
+//        var answer = citations.size
+//        for (i in 1..citations.size){
+//            if (citations.count { it >= i } >= i){
+//                answer = i
+//            }
+//        }
+//
+//        return answer
+//    }
+//}
+
+
+// 최소 직사각형
+// 12:22
+// --
+//class Solution{
+//    fun solution(sizes: Array<IntArray>): Int {
+//
+//        // 한쪽에 큰거 넣기
+//        sizes.map { if (it[0] < it[1]) {
+//            var tmp = it[0]
+//            it[0] = it[1]
+//            it[1] = tmp
+//        } }
+//
+//        return sizes.map { it[0] }.maxOf { it } * sizes.map { it[1] }.maxOf { it }
+//    }
+//}
+
+
+
+// 입국심사
+// 1:20
+// 이분탐색
+//class Solution{
+//    fun solution(n: Int, times: IntArray): Long {
+//        var r: Long = (1_000_000_000 * n.toLong())
+//        var l: Long = 0
+//
+//        while (l <= r){
+//            val mid = (r + l) / 2
+//
+//            var count: Long = 0
+//            for (time in times) {
+//                count += mid / time
+//            }
+//
+//            if ( count >= n){
+//                r = mid
+//            }else if (count < n){
+//                l = mid + 1
+//            }
+//
+//        }
+//
+//        return l
+//    }
+//
+//}
