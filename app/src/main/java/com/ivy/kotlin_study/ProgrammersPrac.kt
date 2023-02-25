@@ -1,6 +1,6 @@
 package com.ivy.kotlin_study
 
-import kotlin.math.*
+import kotlin.math.sqrt
 
 
 //fun solution(numbers: IntArray): Double {
@@ -1308,3 +1308,179 @@ import kotlin.math.*
 //    }
 //
 //}
+
+
+// 위장 - 다시
+// 8:16
+// 8:22
+//class Solution {
+//    fun solution(clothes: Array<Array<String>>): Int {
+//        var answer = clothes.groupBy { it[1] }.map { it.key to it.value.count()+1 }.fold(1) { acc, pair -> acc * pair.second } - 1
+//        return answer
+//        // 위에서 map 쓰지 않고 푼 풀이가 0.5ms 정도 더 빠르다.
+//    }
+//}
+
+
+// 베스트 앨범 - 다시
+// 8:25
+// 9:45
+//class Solution {
+//    fun solution(genres: Array<String>, plays: IntArray): IntArray {
+//        var answer = mutableListOf<Int>()
+//        var tmp = genres.mapIndexed { index, genre -> genre to Pair(index, plays[index]) }
+//            .groupBy ({it.first}, {it.second})
+//            .toList()
+//            .sortedByDescending { it.second.fold(0) { acc, i -> acc + i.second } }
+//            .map { it.second.sortedByDescending { it.second } }
+//            .forEach {
+//                answer.add(it[0].first)
+//                if (it.size > 1) answer.add(it[1].first)
+//            }
+//
+//        println(tmp.toString())
+//        return answer.toIntArray()
+//
+//        // 또는
+//        // .indicies 를 groupBy 하면, 'groupBy기준 = [인덱스들]' 형태의 map을 얻을 수 있다.
+//        // .take(n) 을 통해 앞에서부터 n개의 요소만 가져올 수 있다.
+//        // .flatten()을 통해 2차원 배열을 1차원 배열로 만들 수 있다.
+//        return genres.indices.groupBy { genres[it] }
+//            .toList()
+//            .sortedByDescending { it.second.sumOf { plays[it] } }
+//            .map { it.second.sortedByDescending { plays[it] }.take(2) }
+//            .flatten()
+//            .toIntArray()
+//
+//
+//    }
+//}
+
+
+// 모의고사
+// 9:53
+// 10:24
+//class Solution {
+//    fun solution(answers: IntArray): IntArray {
+//        var answer = mutableListOf<Int>()
+//        var countList = intArrayOf(0, 0, 0)
+//
+//        // 첫번째 사람
+//        var firstArray = intArrayOf(1, 2, 3, 4, 5)
+//        countList[0] = getCorrect(firstArray, answers)
+//
+//        // 두번째 사람
+//        var secondArray = intArrayOf(2, 1, 2, 3, 2, 4, 2, 5)
+//        countList[1] = getCorrect(secondArray, answers)
+//
+//        // 세번째 사람
+//        var thirdArray = intArrayOf(3, 3, 1, 1, 2, 2, 4, 4, 5, 5)
+//        countList[2] = getCorrect(thirdArray, answers)
+//
+//        val max = countList.maxOf { it }
+//        return countList.mapIndexed { index, i -> if (i == max) index+1 else 0 }.filter { it != 0 }.toIntArray()
+//    }
+//
+//    fun getCorrect(array: IntArray, answers: IntArray): Int {
+//        var count = 0
+//        var a = 0
+//        var i = 0
+//
+//        while (a < answers.size){
+//            if (array[i] == answers[a]) count++
+//            i = if (i == array.lastIndex) 0 else i+1
+//            a++
+//        }
+//
+//        return count
+//    }
+//}
+
+
+// 소수 찾기
+// 10:31
+// --
+// 틀린 코드
+//class Solution {
+//    fun solution(numbers: String): Int {
+//        var answer = 0
+//        var result = mutableListOf<Int>()
+//        var intNumbers = numbers.map { it.digitToInt() }
+//
+//        for (set in permutation(intNumbers)){
+//            result.add(set.joinToString("").toInt())
+//        }
+//
+//        println(result.distinct())
+//
+//        return result.distinct().count { isPrime(it) }
+//    }
+//
+//    // el: 원본 데이터로서 변하지 않음  -> elements를 줄여서 el
+//    // fin: 원소를 담는 리스트로서 기본값은 listOf()로 빈 리스트  ->  finish를 줄여서 fin
+//    // sub: fin이 담는 리스트라면 sub는 빼는 리스트 기본값은 el  -> subtraction 줄여 sub
+//    // sub의 있는 원소를 빼서 fin의 넣는 과정을 반복하여 sub가 비었을 때 fin을 반환합니다.
+//    // 순열 구하는 코드.. (1, 2, 3) -> 1, 2, 3
+//    fun permutation(el: List<Int>, fin: List<Int> = listOf(), sub: List<Int> = el ): List<List<Int>> {
+//        return if(sub.isEmpty()) listOf(fin)
+//        else sub.flatMap { permutation(el, fin + it, sub - it) }
+//    }
+//
+//    // 소수인지 구하는 코드
+//    fun isPrime(num:Int):Boolean{
+//        if(num <= 1) return false
+//        return (2..sqrt(num.toDouble()).toInt()).none{ num % it == 0 }
+//    }
+//
+//}
+
+//// 정답코드
+//class Solution {
+//
+//    lateinit var set: MutableSet<Int>
+//
+//    fun solution(numbers: String): Int {
+//        set = mutableSetOf()
+//        getCombination(numbers, "")
+//        return set.filter { isPrime(it) }.count()
+//    }
+//
+//    // 조합구하기
+//    fun getCombination(numbers: String, result: String) {
+//        if (result.isNotEmpty()) set.add(result.toInt())
+//        if (numbers.isEmpty()) return
+//        numbers.forEachIndexed { index, c ->
+//            getCombination(numbers.removeRange(index..index), c.plus(result))
+//        }
+//    }
+//
+//    fun isPrime(number: Int): Boolean {
+//        if (number == 1 || number == 0) {
+//            return false
+//        }
+//        for (i in (2..(number / 2))) {
+//            if (number % i == 0) {
+//                return false
+//            }
+//        }
+//        return true
+//    }
+//
+//}
+
+
+// 최빈값 구하기
+class Solution {
+    fun solution(array: IntArray): Int {
+        val list = array.groupBy{ it }.map { it.key to it.value.count() }.sortedByDescending { it.second }
+        val maxCount = list.toMap().values.maxOf{it}
+        val filtered = list.filter { it.second == maxCount }
+
+        return if (filtered.count() > 1) -1 else filtered[0].first
+
+        // 중요!!
+        // list.groupingBy{ it }.eachCount() 그룹별로 묶고 갯수 세어서 map으로 만들어줌!
+        println(array.toList().groupingBy { it }.eachCount())
+
+    }
+}
