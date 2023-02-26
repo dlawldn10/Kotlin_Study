@@ -9,7 +9,7 @@ fun main(){
     // 1. 배열
     // 사실 배열은 잘 사용하지 않는다.
     // Effective Java에서도 '배열보다는 리스트를 사용하라'라고 말하고있다.
-    val array = arrayOf(100, 200)
+    var array = arrayOf(100, 200)
 
     // array.indices -> array에 들어있는 값을 세서 인덱스를 Range로 담아준다.
     // 0부터 마지막 인덱스 까지의 range
@@ -28,7 +28,7 @@ fun main(){
 
     // array.plus(300) -> plus() 함수를 이용해서 배열에 값을 쉽게 추가할 수도 있다.
     // 자바에서는 배열을 복사해서 추가해야함.
-    array.plus(300)
+    array = array.plus(300)
     println(array)
 
 
