@@ -1,5 +1,8 @@
 package com.ivy.kotlin_study
 
+import java.util.LinkedList
+import java.util.PriorityQueue
+import java.util.Queue
 import kotlin.math.sqrt
 
 
@@ -1470,17 +1473,131 @@ import kotlin.math.sqrt
 
 
 // 최빈값 구하기
-class Solution {
-    fun solution(array: IntArray): Int {
-        val list = array.groupBy{ it }.map { it.key to it.value.count() }.sortedByDescending { it.second }
-        val maxCount = list.toMap().values.maxOf{it}
-        val filtered = list.filter { it.second == maxCount }
+//class Solution {
+//    fun solution(array: IntArray): Int {
+//        val list = array.groupBy{ it }.map { it.key to it.value.count() }.sortedByDescending { it.second }
+//        val maxCount = list.toMap().values.maxOf{it}
+//        val filtered = list.filter { it.second == maxCount }
+//
+//        return if (filtered.count() > 1) -1 else filtered[0].first
+//
+//        // 중요!!
+//        // list.groupingBy{ it }.eachCount() 그룹별로 묶고 갯수 세어서 map으로 만들어줌!
+//        println(array.toList().groupingBy { it }.eachCount())
+//
+//    }
+//}
 
-        return if (filtered.count() > 1) -1 else filtered[0].first
 
-        // 중요!!
-        // list.groupingBy{ it }.eachCount() 그룹별로 묶고 갯수 세어서 map으로 만들어줌!
-        println(array.toList().groupingBy { it }.eachCount())
+// 치킨 쿠폰
+// 2:52
+// 4:33
+//class Solution {
+//    fun solution(chicken: Int): Int {
+//        var answer: Int = 0
+//        var chickens = chicken
+//        var coupons = chicken
+//
+//        while (chickens > 0){
+//
+//            chickens = coupons/10
+//            coupons = coupons/10 + coupons % 10
+//            answer += chickens
+//        }
+//
+//        return answer
+//    }
+//}
 
-    }
-}
+
+
+// 명에의 전당(1)
+// 4:51
+// 5:08
+// 우선순위 큐 = 최소힙 사용
+//class Solution {
+//    fun solution(k: Int, score: IntArray): IntArray {
+//        var answer = arrayListOf<Int>()
+//        var priorityQueue = PriorityQueue<Int>()
+//
+//        for (i in score){
+//            if (priorityQueue.size < k){
+//                priorityQueue.add(i)
+//            }else{
+//                if (priorityQueue.peek() <= i){
+//                    priorityQueue.poll()
+//                    priorityQueue.add(i)
+//                }
+//            }
+//
+//            answer.add(priorityQueue.peek())
+//        }
+//
+//        println(priorityQueue)
+//
+//
+//
+//        return answer.toIntArray()
+//    }
+//}
+
+
+
+// 기사단원의 무기
+// 5:10
+// 5:36
+//import kotlin.math.sqrt
+//class Solution {
+//    fun solution(number: Int, limit: Int, power: Int): Int {
+//        var answer: Int = 0
+//
+//        for (knight in (1..number)){
+//            var op = getOP(knight, limit)
+//            if (op > limit) answer += power
+//            else answer += op
+//        }
+//
+//        return answer
+//    }
+//
+//    // sqrt()으로 빠르게 약수 구하기
+//    fun getOP(number: Int, limit: Int): Int{
+//        var count = 0
+//
+//        for (i in 1 .. sqrt(number.toDouble()).toInt()) {
+//            // ex) number = 10
+//            if (number % i == 0) { // 약수 중 작은 수 저장  ex) 2
+//                count++
+//                if (number / i != i) {  // 약수 중 큰 수 저장 ex) 5
+//                    count++
+//                }
+//                if (count > limit) return count
+//            }
+//        }
+//        return count
+//    }
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
