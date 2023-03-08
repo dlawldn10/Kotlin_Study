@@ -1579,6 +1579,68 @@ import kotlin.math.sqrt
 //}
 
 
+// 나누어 떨어지는 숫자 배열
+//class Solution {
+//    fun solution(arr: IntArray, divisor: Int): IntArray {
+//        var answer = arr.filter { it % divisor == 0 }.sorted().toIntArray()
+//        return if (answer.isEmpty()) intArrayOf(-1) else answer
+//    }
+//}
+
+
+// 시소 짝꿍
+class Solution {
+    fun solution(weights: IntArray): Long {
+        // 시간초과 풀이
+//        var answer: Long = 0
+//        var meterPair = arrayListOf(arrayOf(2, 3), arrayOf(3, 2), arrayOf(2, 4),
+//            arrayOf(4, 2), arrayOf(3, 4), arrayOf(4, 3))
+//
+//        // 모든 사람 조합에 대해서
+//        for (i in 0 until weights.size -1 ){
+//            for (j in i+1 until weights.size){
+//                // 무게가 서로 같으면 하나만 더하고 넘어가기
+//                if (weights[i] == weights[j]) answer++
+//                else {
+//                    for (meters in meterPair){
+//                        if (weights[i]*meters[0] == weights[j]*meters[1]) {
+//                            answer++
+//                            break
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//
+//
+//        return answer
+
+        var answer: Long = 0
+
+        weights.sort()
+        // 모든 사람 조합에 대해서
+        for (i in 0 until weights.size -1 ){
+            for (j in i+1 until weights.size){
+                // 무게가 서로 같으면 하나만 더하고 넘어가기
+                if (weights[i] == weights[j]) answer++
+                else {
+                    if (weights[i]*2 == weights[j]*3
+                        || weights[i]*3 == weights[j]*2
+                        || weights[i]*2 == weights[j]*4
+                        || weights[i]*4 == weights[j]*2
+                        || weights[i]*3 == weights[j]*4
+                        || weights[i]*4 == weights[j]*3) {
+                        answer++
+                        break
+                    }
+                }
+            }
+        }
+
+
+        return answer
+    }
+}
 
 
 
