@@ -1,9 +1,7 @@
 package com.ivy.kotlin_study
 
-import java.util.LinkedList
-import java.util.PriorityQueue
-import java.util.Queue
-import kotlin.math.sqrt
+import com.ivy.kotlin_study.joyce.array
+import kotlin.math.min
 
 
 //fun solution(numbers: IntArray): Double {
@@ -1589,58 +1587,141 @@ import kotlin.math.sqrt
 
 
 // 시소 짝꿍
-class Solution {
-    fun solution(weights: IntArray): Long {
-        // 시간초과 풀이
-//        var answer: Long = 0
-//        var meterPair = arrayListOf(arrayOf(2, 3), arrayOf(3, 2), arrayOf(2, 4),
-//            arrayOf(4, 2), arrayOf(3, 4), arrayOf(4, 3))
+//class Solution {
+//    fun solution(weights: IntArray): Long {
+//        // 시간초과 풀이
+////        var answer: Long = 0
+////        var meterPair = arrayListOf(arrayOf(2, 3), arrayOf(3, 2), arrayOf(2, 4),
+////            arrayOf(4, 2), arrayOf(3, 4), arrayOf(4, 3))
+////
+////        // 모든 사람 조합에 대해서
+////        for (i in 0 until weights.size -1 ){
+////            for (j in i+1 until weights.size){
+////                // 무게가 서로 같으면 하나만 더하고 넘어가기
+////                if (weights[i] == weights[j]) answer++
+////                else {
+////                    for (meters in meterPair){
+////                        if (weights[i]*meters[0] == weights[j]*meters[1]) {
+////                            answer++
+////                            break
+////                        }
+////                    }
+////                }
+////            }
+////        }
+////
+////
+////        return answer
 //
-//        // 모든 사람 조합에 대해서
+//
+//        // 정답 풀이
+//        var answer: Long = 0
+//
+//        // + 정렬
+//        weights.sort()
+//        var cnt = 0
 //        for (i in 0 until weights.size -1 ){
+//            // + 이전거랑 비교해서 같으면 값 하나 빼고 continue
+//            if (i != 0 && weights[i] == weights[i-1]) {
+//                cnt--
+//                answer += cnt
+//                continue
+//            }
+//
+//            cnt = 0
 //            for (j in i+1 until weights.size){
-//                // 무게가 서로 같으면 하나만 더하고 넘어가기
-//                if (weights[i] == weights[j]) answer++
-//                else {
-//                    for (meters in meterPair){
-//                        if (weights[i]*meters[0] == weights[j]*meters[1]) {
-//                            answer++
-//                            break
-//                        }
-//                    }
+//                // + 모든 경우의 수를 || 연산자로 처리해서 for문 줄이기
+//                if (weights[i] == weights[j]
+//                    || weights[i]*2 == weights[j]*3
+//                    || weights[i]*3 == weights[j]*2
+//                    || weights[i]*2 == weights[j]*4
+//                    || weights[i]*4 == weights[j]*2
+//                    || weights[i]*3 == weights[j]*4
+//                    || weights[i]*4 == weights[j]*3) {
+//                    cnt++
 //                }
 //            }
+//            answer += cnt
 //        }
 //
 //
 //        return answer
-
-        var answer: Long = 0
-
-        weights.sort()
-        // 모든 사람 조합에 대해서
-        for (i in 0 until weights.size -1 ){
-            for (j in i+1 until weights.size){
-                // 무게가 서로 같으면 하나만 더하고 넘어가기
-                if (weights[i] == weights[j]) answer++
-                else {
-                    if (weights[i]*2 == weights[j]*3
-                        || weights[i]*3 == weights[j]*2
-                        || weights[i]*2 == weights[j]*4
-                        || weights[i]*4 == weights[j]*2
-                        || weights[i]*3 == weights[j]*4
-                        || weights[i]*4 == weights[j]*3) {
-                        answer++
-                        break
-                    }
-                }
-            }
-        }
+//
+//    }
+//}
 
 
-        return answer
-    }
-}
+
+// 문자열 내림차순으로 배치하기
+// 8:23
+// 8:27
+//class Solution {
+//    fun solution(s: String): String {
+//        return s.toList().sortedByDescending { it }.joinToString("")
+//
+//        // Comparator 쓰는 방법
+//        return s.toCharArray()
+//            .sortedWith(Comparator { a, b -> b - a })
+//            .joinToString("")
+//    }
+//}
+
+
+
+// 이모티콘 할인행사
+// 중간에 힌트 얻음
+// 10:37
+// 11:41
+//class Solution {
+//    var sale = arrayOf(10, 20, 30, 40)
+//    var result = mutableListOf<Array<Int>>()
+//
+//    fun solution(users: Array<IntArray>, emoticons: IntArray): IntArray {
+//
+//        fun DFS(str: String, size: Int){
+//
+//            if (str.split(" ").size == size + 1){
+//                var res = str.split(" ").filter { it.isNotEmpty() }.map { it.toInt() }
+//                var emo = emoticons.mapIndexed { index, i -> arrayOf(res[index], (i * ((100-res[index])*0.01)).toInt()) }
+//                // 가입자 수
+//                var count = 0
+//                // 수익
+//                var income = 0
+//                users.forEach { pair ->
+//                    var tmp = 0
+//                    emo.forEach { epair ->
+//                        // 이모티콘 할인율이 더 크면 산다.
+//                        if (epair[0] >= pair[0]){
+//                            tmp += epair[1]
+//                        }
+//                    }
+//
+//                    if (pair[1] <= tmp) {
+//                        count++
+//                    }else{
+//                        income += tmp
+//                    }
+//
+//                }
+//                result.add(arrayOf(count, income))
+//                return
+//            }
+//
+//            for (i in sale.indices){
+//                DFS(str + sale[i] + " ", size)
+//            }
+//        }
+//
+//        DFS("", emoticons.size)
+//
+//        var answer = result.sortedWith(compareBy({it[0]}, {it[1]}))
+//        println(answer[answer.lastIndex])
+//
+//        return answer[answer.lastIndex].toIntArray()
+//    }
+//
+//
+//}
 
 
 
