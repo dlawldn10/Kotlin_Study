@@ -1,7 +1,6 @@
 package com.ivy.kotlin_study
 
-import com.ivy.kotlin_study.joyce.array
-import kotlin.math.min
+import kotlin.math.max
 
 
 //fun solution(numbers: IntArray): Double {
@@ -1724,10 +1723,58 @@ import kotlin.math.min
 //}
 
 
+// 나머지가 1이 되는 수 찾기
+// 11:30
+// 12:04
+//fun solution(n: Int): Int {
+////    var answer = n
+////    var l = 2
+////    var r = n
+////    var mid = ((l + r) / 2).toInt()
+////    while (l < r) {
+////        if (n % mid == 1) {
+////            answer = min(mid, answer)
+////        }
+////
+////        if (n % mid > 1) {
+////            l = mid + 1
+////        } else if (n % mid <= 1) {
+////            r = mid - 1
+////        }
+////        mid = ((l + r) / 2).toInt()
+////    }
+////    return answer
+//
+//    // 그냥 이걸 원하는 문제였음...
+//    var x = 2
+//    while (n % x != 1){
+//        x++
+//    }
+//
+//    return x
+//}
 
 
 
-
+// 과일 장수
+// 12:08
+// --
+// 정렬문제
+class Solution {
+    fun solution(k: Int, m: Int, score: IntArray): Int {
+        var answer: Int = 0
+        val score = score.sorted().reversed()
+        var index : Int = 0
+        while (true){
+            if(index >= score.size || index+m > score.size){
+                break
+            }
+            answer += score[index+ m -1] * m
+            index += m
+        }
+        return answer
+    }
+}
 
 
 
