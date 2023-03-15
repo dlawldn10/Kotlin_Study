@@ -1,7 +1,5 @@
 package com.ivy.kotlin_study
 
-import kotlin.math.max
-
 
 //fun solution(numbers: IntArray): Double {
 //    return numbers.average()
@@ -1760,19 +1758,29 @@ import kotlin.math.max
 // 12:08
 // --
 // 정렬문제
+//class Solution {
+//    fun solution(k: Int, m: Int, score: IntArray): Int {
+//        var answer: Int = 0
+//        val score = score.sorted().reversed()
+//        var index : Int = 0
+//        while (true){
+//            if(index >= score.size || index+m > score.size){
+//                break
+//            }
+//            answer += score[index+ m -1] * m
+//            index += m
+//        }
+//        return answer
+//    }
+//}
+
+
+// 자연수 뒤집어 배열로 만들기
+// 7:48
+// 7:53
 class Solution {
-    fun solution(k: Int, m: Int, score: IntArray): Int {
-        var answer: Int = 0
-        val score = score.sorted().reversed()
-        var index : Int = 0
-        while (true){
-            if(index >= score.size || index+m > score.size){
-                break
-            }
-            answer += score[index+ m -1] * m
-            index += m
-        }
-        return answer
+    fun solution(n: Long): IntArray {
+        return n.toString().reversed().map { it.digitToInt() }.toIntArray()
     }
 }
 
