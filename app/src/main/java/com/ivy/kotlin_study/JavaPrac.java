@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Set;
 import java.util.Stack;
@@ -278,44 +279,281 @@ public class JavaPrac {
     // 다리를 지나는 트럭
     // 2:15
     // --
-    class Solution {
-        public int solution(int bridge_length, int weight, int[] truck_weights) {
-            Queue<Integer> queue = new LinkedList<>();
-            int sum = 0;
-            int time = 0;
+//    class Solution {
+//        public int solution(int bridge_length, int weight, int[] truck_weights) {
+//            Queue<Integer> queue = new LinkedList<>();
+//            int sum = 0;
+//            int time = 0;
+//
+//            for(int i = 0; i < truck_weights.length; i++) { // 향상된 for문을 쓰는게 좋을 것
+//                int truck = truck_weights[i];
+//
+//                while(true) {
+//                    // 큐에 아무것도 없는 경우 = 어떠한 트럭도 다리위에 없음
+//                    if(queue.isEmpty()) {
+//                        queue.add(truck);
+//                        sum += truck;
+//                        time++; // 다리에 오를 때만 시간 추가
+//                        break;
+//                    } else if(queue.size() == bridge_length) { // 큐에 다리 길이만큼 트럭이 다 찬 경우
+//                        sum -= queue.poll();
+//                    } else  { // 다리 길이만큼 큐가 차지않았음
+//                        // weight 값을 넘지 않는 선에서 새로운 트럭을 다리에 올려줌
+//                        if(sum + truck <= weight) {
+//                            queue.add(truck);
+//                            sum += truck;
+//                            time++;
+//                            break;
+//                        } else {
+//                            // 넘는다면 0을 넣어 이미 큐에 있는 트럭이 다리를 건너게 만듬
+//                            queue.add(0);
+//                            time++;
+//                        }
+//                    }
+//                }
+//            }
+//
+//            // 마지막 트럭에서 반복문이 끝나는데, 마지막 역시 다리 길이만큼 지나가야하기에 + 다리 길이
+//            return time + bridge_length;
+//        }
+//    }
 
-            for(int i = 0; i < truck_weights.length; i++) { // 향상된 for문을 쓰는게 좋을 것
-                int truck = truck_weights[i];
 
-                while(true) {
-                    // 큐에 아무것도 없는 경우 = 어떠한 트럭도 다리위에 없음
-                    if(queue.isEmpty()) {
-                        queue.add(truck);
-                        sum += truck;
-                        time++; // 다리에 오를 때만 시간 추가
-                        break;
-                    } else if(queue.size() == bridge_length) { // 큐에 다리 길이만큼 트럭이 다 찬 경우
-                        sum -= queue.poll();
-                    } else  { // 다리 길이만큼 큐가 차지않았음
-                        // weight 값을 넘지 않는 선에서 새로운 트럭을 다리에 올려줌
-                        if(sum + truck <= weight) {
-                            queue.add(truck);
-                            sum += truck;
-                            time++;
-                            break;
-                        } else {
-                            // 넘는다면 0을 넣어 이미 큐에 있는 트럭이 다리를 건너게 만듬
-                            queue.add(0);
-                            time++;
-                        }
-                    }
+    // 폰켓몬
+//    public int solution(int[] nums) {
+//        int answer = 0;
+//        Set<Integer> set = new HashSet<>();
+//        for (int i = 0; i < nums.length; i++) {
+//            set.add(nums[i]);
+//        }
+//        if (set.size() < nums.length / 2) answer = set.size();
+//        else answer = nums.length / 2;
+//        return answer;
+//    }
+
+
+    // 완주하지 못한 선수
+    // 2:41
+    // 3:06
+//    public String solution(String[] participant, String[] completion) {
+//        String answer = "";
+//        Map<String, Integer> map = new HashMap<>();
+//        for (int i = 0; i < participant.length; i++) {
+//            map.put(participant[i], map.getOrDefault(participant[i], 0) + 1);
+//        }
+//
+//        for (int i = 0; i < completion.length; i++) {
+//            map.put(completion[i], map.get(completion[i]) - 1);
+//        }
+//
+//
+//        for (String key : map.keySet()) {
+//            if (map.get(key) != 0) {
+//                return key;
+//            }
+//        }
+//        return answer;
+//    }
+
+
+    // 위장
+    // 3:17
+//    public int solution(String[][] clothes) {
+//        int answer = 1;
+//        Map<String, Integer> map = new HashMap<>();
+//        for (int i = 0; i < clothes.length; i++) {
+//            map.put(clothes[i][1], map.getOrDefault(clothes[i][1], 0) + 1);
+//        }
+//
+//        for (String key : map.keySet()){
+//            answer *= (map.get(key) + 1);
+//        }
+//
+//        return answer - 1;
+//    }
+
+
+    // 타겟 넘버
+    // 4:17
+    // 4:30
+//    ArrayList<String> results = new ArrayList<>();
+//    public int solution(int[] numbers, int target) {
+//        int answer = 0;
+//
+//        DFS("", numbers.length);
+//        System.out.println(results);
+//
+//        for (int i = 0; i < results.size(); i++) {
+//            int tmp = 0;
+//            for (int j = 0; j < numbers.length; j++) {
+//                if (results.get(i).charAt(j) == '+') tmp += numbers[j];
+//                else tmp -= numbers[j];
+//            }
+//            if (tmp == target) answer++;
+//        }
+//
+//        return answer;
+//    }
+//
+//    int DFS(String ops, int length){
+//        if (ops.length() == length) {
+//            results.add(ops);
+//            return 0;
+//        }
+//
+//        DFS(ops + '+', length);
+//        DFS(ops + '-', length);
+//        return 0;
+//    }
+
+
+    // 단어 변환
+    // 4:32
+    // 5:07
+//    public int solution(String begin, String target, String[] words) {
+//        int answer = 0;
+//        if (!Arrays.stream(words).anyMatch(str -> Objects.equals(str, target))) return 0;
+//
+//        Queue<String[]> queue = new LinkedList<>();
+//        queue.add(new String[] {begin, "0"});
+//
+//        while (!queue.isEmpty()){
+//            String[] tuple = queue.poll();
+//
+//            if (Objects.equals(tuple[0], target)) {
+//                answer = Integer.parseInt(tuple[1]);
+//                break;
+//            }
+//
+//            for (int i = 0; i < words.length; i++) {
+//                int cnt = 0;
+//                for (int j = 0; j < words[i].length(); j++) {
+//                    if (words[i].charAt(j) != tuple[0].charAt(j)) cnt++;
+//                }
+//                if (cnt == 1) queue.add(new String[] { words[i], String.valueOf((Integer.parseInt(tuple[1]) + 1))});
+//            }
+//
+//        }
+//
+//        return answer;
+//    }
+
+
+    // 입국 심사
+    // 5:28
+    // --
+//    public long solution(int n, int[] times) {
+//        long answer = 0;
+//        Arrays.sort(times);
+//        long l = 1;
+//        long r = times[times.length-1] * (long)n;
+//
+//        while(l <= r){
+//            long mid = ((l + r) / 2);
+//
+//            long count = 0;
+//            for (int i = 0; i < times.length; i++) {
+//                count += (mid / times[i]);
+//            }
+//
+//            if (count >= n){
+//                r = mid - 1;
+//                answer = mid;
+//            }else{
+//                l = mid + 1;
+//            }
+//
+//
+//        }
+//
+//        return answer;
+//    }
+
+
+
+
+    // 3. 프림알고리즘으로 풀려다가 실패
+    class Edge {
+        int y;
+        int x;
+        int cost;
+
+        Edge(int  x, int y, int cost){
+            this.y = y;
+            this.x = x;
+            this.cost = cost;
+        }
+
+    }
+
+
+    int[] dx = {0, -1, 0, 1};
+    int[] dy = {1, 0, -1, 0};
+    int Y = 0;
+    int X = 0;
+    public int solution(int[][] board, int c) {
+        int answer = 0;
+        Y = board.length;
+        X = board[0].length;
+        int[][] visit = new int[Y][X];
+
+        PriorityQueue<Edge> pq = new PriorityQueue<>();
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                if(board[i][j] == 2){
+                    pq.offer(new Edge(i, j, 0));
+                    break;
                 }
             }
-
-            // 마지막 트럭에서 반복문이 끝나는데, 마지막 역시 다리 길이만큼 지나가야하기에 + 다리 길이
-            return time + bridge_length;
         }
+
+        int total = 0;
+        while(!pq.isEmpty()) {
+            Edge edge = pq.poll();
+
+            int y = edge.y;
+            int x = edge.x;
+            int cost = edge.cost;
+
+            //방문 했으면 건너뜀
+            if(visit[y][x] == 1) continue;
+
+            visit[y][x] = 1;
+            total += cost;
+
+            for (int i = 0; i < 4; i++) {
+                int nx = x + dx[i];
+                int ny = y + dy[i];
+
+                if (is_valid_coord(ny, nx) && visit[ny][nx] == 0){
+                    if (board[ny][nx] == 1) pq.add(new Edge(ny, nx, c + 1));
+                    else pq.add(new Edge(ny, nx, 1));
+                }
+            }
+        }
+
+        System.out.println(total);
+        return total;
     }
+
+    boolean is_valid_coord(int y, int x){
+        return ((0 <= y && y < Y) && (0 <= x && x < X));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
