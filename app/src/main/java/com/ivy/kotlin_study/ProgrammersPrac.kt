@@ -1,5 +1,8 @@
 package com.ivy.kotlin_study
 
+import java.util.LinkedList
+import java.util.Queue
+
 
 //fun solution(numbers: IntArray): Double {
 //    return numbers.average()
@@ -1778,15 +1781,94 @@ package com.ivy.kotlin_study
 // 자연수 뒤집어 배열로 만들기
 // 7:48
 // 7:53
-class Solution {
-    fun solution(n: Long): IntArray {
-        return n.toString().reversed().map { it.digitToInt() }.toIntArray()
-    }
-}
+//class Solution {
+//    fun solution(n: Long): IntArray {
+//        return n.toString().reversed().map { it.digitToInt() }.toIntArray()
+//    }
+//}
 
 
+// 문자열 내맘대로 정렬하기
+// 5:39
+// 5:48
+//class Solution {
+//    fun solution(strings: Array<String>, n: Int): Array<String> {
+//        return strings.sortedWith(compareBy({it[n]}, {it})).toTypedArray()
+//    }
+//}
 
 
+// 마법의 엘리베이터
+// 문제 잘못 이해..
+//class Solution {
+//
+////    fun solution(storey: Int): Int {
+////        var answer: Int = 0
+////        val buttons = arrayListOf(-1, 1, -10, 10, -100, 100)
+////
+////        var queue: Queue<Array<Int>> = LinkedList()
+////        // 현재 층, 돌 갯수
+////        queue.add(arrayOf(storey, 0))
+////
+////        while (!queue.isEmpty()){
+////            val cur = queue.poll()
+////
+////            if (cur[0] == 0){
+////                answer = cur[1]
+////                break
+////            }
+////
+////            for (button in buttons){
+////                if (cur[0] + button >= 0){
+////                    queue.add(arrayOf(cur[0] + button, cur[1] + 1))
+////                }
+////            }
+////        }
+////
+////
+////        return answer
+////    }
+//
+//
+//    // 제한 조건을 보고 bfs/dfs로 시간초과가 날거같다면 -> dp 또는 greedy로 풀수 있는지 생각해본다.
+//    // 자릿수를 보고 판별하는 greedy
+//    fun solution(storey: Int): Int {
+//        var tempStorey = storey
+//        var cnt = 0
+//        while(tempStorey > 0){
+//            val ext = tempStorey % 10
+//            tempStorey /= 10
+//
+//            // 현재 자릿수의 값이 5라면 -> 다음 자릿수에 따라 더할지 뺄지 결정한다.
+//            if(ext==5){
+//                // 다음 자릿수가 5보다 크다면 -> 더해서 10을 만든다.
+//                if(tempStorey%10 >=5) {
+//                    tempStorey++
+//                    cnt += 10 - ext
+//                }
+//                // 다음 자릿수가 5보다 작다면 -> 빼서 0을 만든다.
+//                else {
+//                    cnt += ext
+//                }
+//            }
+//            // 5보다 크다면 -> 더해서 10을 만든다.
+//            else if(ext > 5) {
+//                tempStorey++
+//                cnt += 10 - ext
+//            }
+//            // 5보다 작다면 -> 빼서 0을 만든다.
+//            else {
+//                cnt += ext
+//            }
+//        }
+//
+//        return cnt
+//    }
+//
+//}
+
+
+//
 
 
 

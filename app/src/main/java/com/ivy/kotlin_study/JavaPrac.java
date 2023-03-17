@@ -473,72 +473,76 @@ public class JavaPrac {
 
 
     // 3. 프림알고리즘으로 풀려다가 실패
-    class Edge {
-        int y;
-        int x;
-        int cost;
+//    class Edge {
+//        int y;
+//        int x;
+//        int cost;
+//
+//        Edge(int  x, int y, int cost){
+//            this.y = y;
+//            this.x = x;
+//            this.cost = cost;
+//        }
+//
+//    }
+//
+//
+//    int[] dx = {0, -1, 0, 1};
+//    int[] dy = {1, 0, -1, 0};
+//    int Y = 0;
+//    int X = 0;
+//    public int solution(int[][] board, int c) {
+//        int answer = 0;
+//        Y = board.length;
+//        X = board[0].length;
+//        int[][] visit = new int[Y][X];
+//
+//        PriorityQueue<Edge> pq = new PriorityQueue<>();
+//        for (int i = 0; i < board.length; i++) {
+//            for (int j = 0; j < board[0].length; j++) {
+//                if(board[i][j] == 2){
+//                    pq.offer(new Edge(i, j, 0));
+//                    break;
+//                }
+//            }
+//        }
+//
+//        int total = 0;
+//        while(!pq.isEmpty()) {
+//            Edge edge = pq.poll();
+//
+//            int y = edge.y;
+//            int x = edge.x;
+//            int cost = edge.cost;
+//
+//            //방문 했으면 건너뜀
+//            if(visit[y][x] == 1) continue;
+//
+//            visit[y][x] = 1;
+//            total += cost;
+//
+//            for (int i = 0; i < 4; i++) {
+//                int nx = x + dx[i];
+//                int ny = y + dy[i];
+//
+//                if (is_valid_coord(ny, nx) && visit[ny][nx] == 0){
+//                    if (board[ny][nx] == 1) pq.add(new Edge(ny, nx, c + 1));
+//                    else pq.add(new Edge(ny, nx, 1));
+//                }
+//            }
+//        }
+//
+//        System.out.println(total);
+//        return total;
+//    }
+//
+//    boolean is_valid_coord(int y, int x){
+//        return ((0 <= y && y < Y) && (0 <= x && x < X));
+//    }
 
-        Edge(int  x, int y, int cost){
-            this.y = y;
-            this.x = x;
-            this.cost = cost;
-        }
-
-    }
 
 
-    int[] dx = {0, -1, 0, 1};
-    int[] dy = {1, 0, -1, 0};
-    int Y = 0;
-    int X = 0;
-    public int solution(int[][] board, int c) {
-        int answer = 0;
-        Y = board.length;
-        X = board[0].length;
-        int[][] visit = new int[Y][X];
-
-        PriorityQueue<Edge> pq = new PriorityQueue<>();
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[0].length; j++) {
-                if(board[i][j] == 2){
-                    pq.offer(new Edge(i, j, 0));
-                    break;
-                }
-            }
-        }
-
-        int total = 0;
-        while(!pq.isEmpty()) {
-            Edge edge = pq.poll();
-
-            int y = edge.y;
-            int x = edge.x;
-            int cost = edge.cost;
-
-            //방문 했으면 건너뜀
-            if(visit[y][x] == 1) continue;
-
-            visit[y][x] = 1;
-            total += cost;
-
-            for (int i = 0; i < 4; i++) {
-                int nx = x + dx[i];
-                int ny = y + dy[i];
-
-                if (is_valid_coord(ny, nx) && visit[ny][nx] == 0){
-                    if (board[ny][nx] == 1) pq.add(new Edge(ny, nx, c + 1));
-                    else pq.add(new Edge(ny, nx, 1));
-                }
-            }
-        }
-
-        System.out.println(total);
-        return total;
-    }
-
-    boolean is_valid_coord(int y, int x){
-        return ((0 <= y && y < Y) && (0 <= x && x < X));
-    }
+    //
 
 
 
