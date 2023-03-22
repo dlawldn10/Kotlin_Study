@@ -1,8 +1,5 @@
 package com.ivy.kotlin_study
 
-import java.util.LinkedList
-import java.util.Queue
-
 
 //fun solution(numbers: IntArray): Double {
 //    return numbers.average()
@@ -1868,7 +1865,124 @@ import java.util.Queue
 //}
 
 
+// OX퀴즈 lv0
+//class Solution {
+//    fun solution(quiz: Array<String>): Array<String> {
+//        var answer: Array<String> = Array(quiz.size){""}
+//        for((i, q) in quiz.withIndex()){
+//            val tmp = q.split(" ")
+//            if (tmp[1] == "+"){
+//                answer[i] =
+//                    if (tmp[0].toInt() + tmp[2].toInt() == tmp[4].toInt()) "O"
+//                    else "X"
 //
+//            }else if (tmp[1] == "-"){
+//                answer[i] =
+//                    if (tmp[0].toInt() - tmp[2].toInt() == tmp[4].toInt()) "O"
+//                    else "X"
+//            }
+//
+//        }
+//        return answer
+//    }
+//}
+
+
+// 덧칠하기 lv1
+// 5:00
+// 5:23
+//class Solution {
+//    fun solution(n: Int, m: Int, section: IntArray): Int {
+//        var answer: Int = 1
+//        var tmp = section[0] + m
+//        for (i in section){
+//            if (i >= tmp) {
+//                tmp = i + m
+//                answer++
+//            }
+//        }
+//        return answer
+//    }
+//}
+
+
+// 혼자서 하는 틱택토 lv2
+// 5:24
+// 7:00
+// 중간에 30분은 딴짓한듯..ㅎ
+class Solution {
+    fun solution(board: Array<String>): Int {
+        var answer: Int = 0
+        var bingoCount = 0
+        var Xcount = 0
+        var Ocount = 0
+        var winner = arrayListOf<Char>()
+
+        // 가로
+        if (board[0][0] != '.' && board[0][0] == board[0][1] && board[0][0] == board[0][2]){
+            bingoCount++
+            winner.add(board[0][0])
+        }
+        if (board[1][0] != '.' && board[1][0] == board[1][1] && board[1][0] == board[1][2]) {
+            bingoCount++
+            winner.add(board[1][0])
+        }
+        if (board[2][0] != '.' && board[2][0] == board[2][1] && board[2][0] == board[2][2]){
+            bingoCount++
+            winner.add(board[2][0])
+        }
+        // 세로
+        if(board[0][0] != '.' && board[0][0] == board[1][0] && board[0][0] == board[2][0]){
+            bingoCount++
+            winner.add(board[0][0])
+        }
+        if(board[0][1] != '.' && board[0][1] == board[1][1] && board[0][1] == board[2][1]){
+            bingoCount++
+            winner.add(board[0][1])
+        }
+        if(board[0][2] != '.' && board[0][2] == board[1][2] && board[0][2] == board[2][2]){
+            bingoCount++
+            winner.add(board[0][2])
+        }
+        // 대각선
+        if(board[0][0] != '.' && board[0][0] == board[1][1] && board[0][0] == board[2][2]){
+            bingoCount++
+            winner.add(board[0][0])
+        }
+        if(board[2][0] != '.' && board[2][0] == board[1][1] && board[2][0] == board[0][2]){
+            bingoCount++
+            winner.add(board[2][0])
+        }
+
+
+
+
+        for (i in board){
+            var map = i.toCharArray().toList().groupingBy{ it }.eachCount()
+            Ocount += map.getOrDefault('O', 0)
+            Xcount += map.getOrDefault('X', 0)
+
+        }
+
+        if (bingoCount == 1){
+
+            if (winner[0] == 'X' && Ocount == Xcount ) answer = 1  // X가 이긴 경우
+            else if (winner[0] == 'O' && Ocount == Xcount + 1) answer = 1  // O가 이긴 경우
+
+        }else if (bingoCount == 0){
+            // 경기 중
+            // X가 마지막으로 둠 || O가 마지막으로 둠
+            if (Ocount == Xcount || Ocount == Xcount + 1) answer = 1
+        }else if (bingoCount == 2){
+            // O가 마지막에 빙고를 두개 만드는 경우가 있음
+            // O와 X가 동시에 빙고인 경우는 빼야함
+            if (winner[0] == winner[1] && Ocount == Xcount + 1) answer = 1
+        }
+
+
+        return answer
+    }
+}
 
 
 
