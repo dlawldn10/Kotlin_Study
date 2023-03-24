@@ -1,5 +1,8 @@
 package com.ivy.kotlin_study
 
+import java.util.LinkedList
+import kotlin.math.abs
+
 
 //fun solution(numbers: IntArray): Double {
 //    return numbers.average()
@@ -1910,80 +1913,181 @@ package com.ivy.kotlin_study
 // 5:24
 // 7:00
 // 중간에 30분은 딴짓한듯..ㅎ
-class Solution {
-    fun solution(board: Array<String>): Int {
-        var answer: Int = 0
-        var bingoCount = 0
-        var Xcount = 0
-        var Ocount = 0
-        var winner = arrayListOf<Char>()
+//class Solution {
+//    fun solution(board: Array<String>): Int {
+//        var answer: Int = 0
+//        var bingoCount = 0
+//        var Xcount = 0
+//        var Ocount = 0
+//        var winner = arrayListOf<Char>()
+//
+//        // 가로
+//        if (board[0][0] != '.' && board[0][0] == board[0][1] && board[0][0] == board[0][2]){
+//            bingoCount++
+//            winner.add(board[0][0])
+//        }
+//        if (board[1][0] != '.' && board[1][0] == board[1][1] && board[1][0] == board[1][2]) {
+//            bingoCount++
+//            winner.add(board[1][0])
+//        }
+//        if (board[2][0] != '.' && board[2][0] == board[2][1] && board[2][0] == board[2][2]){
+//            bingoCount++
+//            winner.add(board[2][0])
+//        }
+//        // 세로
+//        if(board[0][0] != '.' && board[0][0] == board[1][0] && board[0][0] == board[2][0]){
+//            bingoCount++
+//            winner.add(board[0][0])
+//        }
+//        if(board[0][1] != '.' && board[0][1] == board[1][1] && board[0][1] == board[2][1]){
+//            bingoCount++
+//            winner.add(board[0][1])
+//        }
+//        if(board[0][2] != '.' && board[0][2] == board[1][2] && board[0][2] == board[2][2]){
+//            bingoCount++
+//            winner.add(board[0][2])
+//        }
+//        // 대각선
+//        if(board[0][0] != '.' && board[0][0] == board[1][1] && board[0][0] == board[2][2]){
+//            bingoCount++
+//            winner.add(board[0][0])
+//        }
+//        if(board[2][0] != '.' && board[2][0] == board[1][1] && board[2][0] == board[0][2]){
+//            bingoCount++
+//            winner.add(board[2][0])
+//        }
+//
+//
+//        for (i in board){
+//            var map = i.toCharArray().toList().groupingBy{ it }.eachCount()
+//            Ocount += map.getOrDefault('O', 0)
+//            Xcount += map.getOrDefault('X', 0)
+//
+//        }
+//
+//        if (bingoCount == 1){
+//
+//            if (winner[0] == 'X' && Ocount == Xcount ) answer = 1  // X가 이긴 경우
+//            else if (winner[0] == 'O' && Ocount == Xcount + 1) answer = 1  // O가 이긴 경우
+//
+//        }else if (bingoCount == 0){
+//            // 경기 중
+//            // X가 마지막으로 둠 || O가 마지막으로 둠
+//            if (Ocount == Xcount || Ocount == Xcount + 1) answer = 1
+//        }else if (bingoCount == 2){
+//            // O가 마지막에 빙고를 두개 만드는 경우가 있음
+//            // O와 X가 동시에 빙고인 경우는 빼야함
+//            if (winner[0] == winner[1] && Ocount == Xcount + 1) answer = 1
+//        }
+//
+//
+//        return answer
+//    }
+//}
 
-        // 가로
-        if (board[0][0] != '.' && board[0][0] == board[0][1] && board[0][0] == board[0][2]){
-            bingoCount++
-            winner.add(board[0][0])
-        }
-        if (board[1][0] != '.' && board[1][0] == board[1][1] && board[1][0] == board[1][2]) {
-            bingoCount++
-            winner.add(board[1][0])
-        }
-        if (board[2][0] != '.' && board[2][0] == board[2][1] && board[2][0] == board[2][2]){
-            bingoCount++
-            winner.add(board[2][0])
-        }
-        // 세로
-        if(board[0][0] != '.' && board[0][0] == board[1][0] && board[0][0] == board[2][0]){
-            bingoCount++
-            winner.add(board[0][0])
-        }
-        if(board[0][1] != '.' && board[0][1] == board[1][1] && board[0][1] == board[2][1]){
-            bingoCount++
-            winner.add(board[0][1])
-        }
-        if(board[0][2] != '.' && board[0][2] == board[1][2] && board[0][2] == board[2][2]){
-            bingoCount++
-            winner.add(board[0][2])
-        }
-        // 대각선
-        if(board[0][0] != '.' && board[0][0] == board[1][1] && board[0][0] == board[2][2]){
-            bingoCount++
-            winner.add(board[0][0])
-        }
-        if(board[2][0] != '.' && board[2][0] == board[1][1] && board[2][0] == board[0][2]){
-            bingoCount++
-            winner.add(board[2][0])
-        }
+
+// 캐릭터의 좌표 lv0
+// 10:58
+// 11:10
+//class Solution {
+//    fun solution(keyinput: Array<String>, board: IntArray): IntArray {
+//        val w = board[0]/2
+//        val h = board[1]/2
+//        var x = 0
+//        var y = 0
+//
+//        for (key in keyinput){
+//            when(key){
+//                "up" -> if (abs(y+1) <= h) y += 1
+//                "down" -> if (abs(y-1) <= h) y -= 1
+//                "left" -> if (abs(x-1) <= w) x -= 1
+//                "right" -> if (abs(x+1) <= w) x += 1
+//            }
+//        }
+//        return intArrayOf(x, y)
+//    }
+//}
 
 
+// 문자열 다루기 기본 lv1
+// 11:11
+// 11:21
+//class Solution {
+//    fun solution(s: String): Boolean {
+//        if (s.any { !it.isDigit() } || (s.length != 4 && s.length != 6)) return false
+//        return true
+//    }
+//}
 
 
-        for (i in board){
-            var map = i.toCharArray().toList().groupingBy{ it }.eachCount()
-            Ocount += map.getOrDefault('O', 0)
-            Xcount += map.getOrDefault('X', 0)
-
-        }
-
-        if (bingoCount == 1){
-
-            if (winner[0] == 'X' && Ocount == Xcount ) answer = 1  // X가 이긴 경우
-            else if (winner[0] == 'O' && Ocount == Xcount + 1) answer = 1  // O가 이긴 경우
-
-        }else if (bingoCount == 0){
-            // 경기 중
-            // X가 마지막으로 둠 || O가 마지막으로 둠
-            if (Ocount == Xcount || Ocount == Xcount + 1) answer = 1
-        }else if (bingoCount == 2){
-            // O가 마지막에 빙고를 두개 만드는 경우가 있음
-            // O와 X가 동시에 빙고인 경우는 빼야함
-            if (winner[0] == winner[1] && Ocount == Xcount + 1) answer = 1
-        }
-
-
-        return answer
-    }
-}
-
+// 미로 탈출 lv2
+// 11:22
+// 12:38
+// BFS를 두번 부르려면....큐를 먼저 깔끔히 지우고 부르자...
+//class Solution {
+//    fun solution(maps: Array<String>): Int {
+//        var answer: Int = 0
+//        val dy = arrayOf(0, 1, 0, -1)
+//        val dx = arrayOf(1, 0, -1, 0)
+//
+//        // y, x, d
+//        var start = Array(3){0}
+//        var lever = Array(3){0}
+//
+//
+//        for (i in maps.indices){
+//            for (j in maps[0].indices){
+//                if (maps[i][j] == 'S'){
+//                    start = arrayOf(i, j, 0)
+//                }else if (maps[i][j] == 'L'){
+//                    lever = arrayOf(i, j, 0)
+//                }
+//            }
+//        }
+//
+//        fun is_valid_coord(y: Int, x: Int): Boolean{
+//            return (0 <= y && y < maps.size && 0 <= x && x < maps[0].length)
+//        }
+//
+//        fun BFS(arry: Array<Int>, G: Char): Int{
+//            val check = Array(maps.size, {IntArray(maps[0].length, {0})})
+//            val queue = LinkedList<Array<Int>>()
+//            queue.add(arry)
+//            check[arry[0]][arry[1]] = 1
+//
+//            while (queue.size > 0){
+//                val list = queue.poll()
+//
+//                if (maps[list[0]][list[1]] == G){
+//                    return list[2]
+//                }
+//
+//                for (i in 0..3){
+//                    val ny = list[0] + dy[i]
+//                    val nx = list[1] + dx[i]
+//                    if (is_valid_coord(ny, nx) && maps[ny][nx] != 'X' && check[ny][nx] == 0){
+//                        check[ny][nx] = 1
+//                        queue.add(arrayOf(ny, nx, list[2]+1))
+//                    }
+//                }
+//
+//            }
+//
+//            return -1
+//        }
+//
+//        // S -> L
+//        var tmp = BFS(start, 'L')
+//        if (tmp == -1) return -1 else answer += tmp
+//
+//
+//        // L -> G
+//        tmp = BFS(lever, 'E')
+//        if (tmp == -1) return -1 else answer += tmp
+//
+//        return answer
+//    }
+//}
 
 
 
