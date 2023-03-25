@@ -2,6 +2,7 @@ package com.ivy.kotlin_study
 
 import java.util.LinkedList
 import kotlin.math.abs
+import kotlin.math.max
 
 
 //fun solution(numbers: IntArray): Double {
@@ -2090,8 +2091,62 @@ import kotlin.math.abs
 //}
 
 
+// 연속된 수의 합 lv0
+// 10:35
+// 10:49
+//class Solution {
+//    fun solution(num: Int, total: Int): IntArray {
+//        // 내 풀이: 완탐 풀이
+//        var i = -1 * num
+//        while (i <= total){
+//            if ((i until i+num).sum() == total) break
+//            i++
+//        }
+//
+//
+//        // 수학 풀이 : 등차수열의 합 공식 이용 -> 첫 항을 구하고 결과 리턴
+//        // 첫 항과 마지막 항을 더한 뒤 항의 개수를 곱하고 2로 나눈 값
+//        // Sn = {n*(a+l)}/2
+//        val i = total/num + (1-num)/2
+//        return (i until i+num).toList().toIntArray()
+//    }
+//}
 
 
+// 최대 공약수와 최소 공배수 lv1
+// 11:21
+// 11:28
+// 참고) 유클리드 호제법
+// num1 * num2 = gcd * lcm
+//class Solution {
+//    fun solution(n: Int, m: Int): IntArray {
+//        var answer = intArrayOf(0, 0)
+//        for(i in 1..max(n, m)) {
+//            if(n%i == 0 && m%i == 0) {
+//                // 최대공약수
+//                answer[0] = i
+//                // 유클리드 호제법으로 최소공배수 바로 구하기
+//                answer[1] = (n*m)/i
+//            }
+//        }
+//        return answer
+//    }
+//}
+//
+//// 꼬리 재귀를 활용한 최대 공약수 구하는법
+//tailrec fun gcd(a: Int, b: Int): Int = if (b == 0) a else gcd(b, a % b)
+//
+//// 최소공배수 구하기
+//fun lcm(num1: Int, num2: Int): Int{
+//    var lcm = 1
+//    while(true){
+//        if((lcm % num1 == 0) && (lcm % num2 == 0)){
+//            break
+//        }
+//        lcm++
+//    }
+//    return lcm
+//}
 
 
 
