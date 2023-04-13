@@ -1,13 +1,7 @@
 package com.ivy.kotlin_study
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
-import kotlin.math.abs
 import kotlin.math.max
-import kotlin.math.min
 
 
 // 13458 - 시험감독
@@ -459,4 +453,88 @@ import kotlin.math.min
 //}
 
 
-//
+// 3085 - 사탕 게임
+// 11:43
+// --
+// 시간초과
+fun main(){
+    val sc = Scanner(System.`in`)
+    val N = sc.nextInt()
+    val adj = mutableListOf<MutableList<Char>>()
+    repeat(N){
+        val row = sc.next().toMutableList()
+        adj.add(row)
+    }
+    var answer = 0
+
+    fun search(){
+        // 가로 일렬 탐색
+        var count = 0
+        for(i in 0 until N){
+            count = 1
+            for (j in 0 until N-1){
+                if (adj[i][j] == adj[i][j+1]){
+                    count++
+                    answer = max(answer, count)
+                }
+                else {
+                    count = 1
+                }
+            }
+        }
+
+        // 세로 일렬 탐색 for문 i, j 바꾸기!!
+        for(j in 0 until N){
+            count = 1
+            for (i in 0 until N-1){
+                if (adj[i][j] == adj[i+1][j]) {
+                    count++
+                    answer = max(answer, count)
+                }
+                else {
+                    count = 1
+                }
+            }
+        }
+
+    }
+
+
+    for (i in 0 until N){
+        for (j in 0 until N){
+            // 양옆 스왑
+            if (j+1 < N){
+                val a = adj[i][j]
+                val b = adj[i][j+1]
+                // 서로 스왑하고
+                adj[i][j] = b
+                adj[i][j+1] = a
+                // 가장 긴 연결 요소 구하기
+                search()
+                // 스왑한거 되돌려놓기
+                adj[i][j] = a
+                adj[i][j+1] = b
+            }
+
+            // 위아래 스왑
+            if (i+1 < N){
+                val a = adj[i][j]
+                val b = adj[i+1][j]
+                // 서로 스왑하고
+                adj[i][j] = b
+                adj[i+1][j] = a
+                // 가장 긴 연결 요소 구하기
+                search()
+                // 스왑한거 되돌려놓기
+                adj[i][j] = a
+                adj[i+1][j] = b
+            }
+        }
+
+    }
+
+    println(answer)
+
+}
+
+
