@@ -1,6 +1,6 @@
 package com.ivy.kotlin_study
 
-import java.util.LinkedList
+import java.util.*
 import kotlin.math.abs
 import kotlin.math.max
 
@@ -2147,6 +2147,213 @@ import kotlin.math.max
 //    }
 //    return lcm
 //}
+
+
+
+// 퍼즐 모양 채우기 lv3
+// 11:15
+// --
+//import java.util.*
+//class Solution {
+//    fun solution(game_board: Array<IntArray>, table: Array<IntArray>): Int {
+//        var answer: Int = -1
+//        val N = game_board.size
+//        var dy = arrayOf(0, -1, 0, 1)
+//        var dx = arrayOf(1, 0, -1, 0)
+//        val check_block = Array(N){ Array(N) {0}}
+//        val check_board = Array(N){ Array(N) {0}}
+//        // 각 블럭의 좌표를 담은 리스트들의 집합
+//        val blocks = arrayListOf<ArrayList<Pair<Int, Int>>>()
+//        // 각 보드의 좌표를 담은 리스트들의 집합
+//        val boards = arrayListOf<ArrayList<Pair<Int, Int>>>()
+//
+//        fun is_valid_coord(y: Int, x: Int): Boolean{
+//            return (y in 0 until N && x in 0 until N)
+//        }
+//
+//        // bfs로 블록/보드 구하기
+//        fun searchBlock(queue: LinkedList<Pair<Int, Int>>, adj: Array<IntArray>, ok: Int, save: ArrayList<Pair<Int, Int>>, check: Array<Array<Int>>, fy: Int, fx: Int){
+//
+//            while (queue.isNotEmpty()){
+//                val (y, x) = queue.poll()
+//
+//                for (k in 0..3){
+//                    val ny = y + dy[k]
+//                    val nx = x + dx[k]
+//                    if(is_valid_coord(ny, nx) && check[ny][nx] == 0 && adj[ny][nx] == ok){
+//                        check[ny][nx] = 1
+//                        queue.add(Pair(ny, nx))
+//                        save.add(Pair(ny-fy, nx-fx))
+//                    }
+//
+//                }
+//            }
+//        }
+//
+//        for (i in 0 until N){
+//            for (j in 0 until N){
+//                if(check_block[i][j] == 0 && table[i][j] == 1){
+//                    val queue = LinkedList<Pair<Int, Int>>()
+//                    queue.add(Pair(i, j))
+//                    check_block[i][j] = 1
+//                    val save = arrayListOf<Pair<Int, Int>>()
+//                    save.add(Pair(0, 0))
+//
+//                    searchBlock(queue, table, 1, save, check_block, i, j)
+//
+//                    println(save)
+//                    blocks.add(save)
+//                }
+//
+//                if(check_board[i][j] == 0 && game_board[i][j] == 0){
+//                    val queue = LinkedList<Pair<Int, Int>>()
+//                    queue.add(Pair(i, j))
+//                    check_board[i][j] = 1
+//                    val save = arrayListOf<Pair<Int, Int>>()
+//                    save.add(Pair(0, 0))
+//
+//                    searchBlock(queue, game_board, 0, save, check_board, i, j)
+//
+//                    println("------" + save)
+//                    boards.add(save)
+//                }
+//            }
+//        }
+//
+//
+//        // 블록을 돌려가며 좌표 비교해서 맞는거 세기
+//        dy = arrayOf(1, -1, -1)
+//        dx = arrayOf(1, 1, -1)
+//        for (i in blocks){
+//            for (j in boards){
+//
+//                if (i.size != j.size) continue
+//                // 안돌린 상태에서 한번 판별
+//                if (i == j) {
+//                    answer += i.size
+//                    continue
+//                }
+//
+//                // 어떻게 돌리지???
+//                // ......
+//
+//
+//
+//            }
+//        }
+//
+//
+//        return answer
+//    }
+//}
+
+
+// 기능개발 - lv2
+// 9:05
+// 10:18
+//class Solution {
+//    fun solution(progresses: IntArray, speeds: IntArray): IntArray {
+//        var answer = arrayListOf<Int>()
+//        val queue = LinkedList<Pair<Int, Int>>()
+//        progresses.forEachIndexed { i, v -> queue.add(Pair(v, speeds[i])) }
+//
+//        while (queue.isNotEmpty()){
+//            var count = 0
+//            var isAvailable = false
+//            var (prog, speed) = queue.peek()
+//            if (prog + speed >= 100){
+//                count++
+//                isAvailable = true
+//                queue.poll()
+//            }
+//            val length = queue.size
+//            if (length <= 0) {
+//                if(count != 0) answer.add(count)
+//                break
+//            }
+//            for (i in 0 until length){
+//                val tmp = queue.poll()
+//                prog = tmp.first
+//                speed = tmp.second
+//                if (isAvailable && prog+speed >= 100){
+//                    count++
+//                }else{
+//                    isAvailable = false
+//                    queue.add(Pair(prog+speed, speed))
+//                }
+//            }
+//            //println(queue)
+//            if(count != 0) answer.add(count)
+//        }
+//
+//
+//        return answer.toIntArray()
+//    }
+//}
+
+
+// 가장 먼 노드 - lv3
+// 10:22
+// 11:25
+// 완전탐색 BFS...
+class Solution {
+    fun solution(n: Int, edge: Array<IntArray>): Int {
+        var answer = 0
+        val adj = Array(n+1) { LinkedList<Int>() }
+        edge.forEach { (i, j) ->
+            adj[j].add(i)
+            adj[i].add(j)
+        }
+        val countArray = Array(n+1){ 0 }
+        var max = 0
+
+        fun BFS(){
+            // i(엣지), d
+            val queue = LinkedList<Pair<Int, Int>>()
+            val check = Array(n+1){ 0 }
+            queue.add(Pair(1, 0))
+            check[1] = 1
+
+            while (queue.isNotEmpty()){
+                val (i, d) = queue.poll()
+
+                countArray[i] = d
+                if (d > max) max = d
+
+                for (j in adj[i]){
+                    if (check[j] == 0){
+                        check[j] = 1
+                        queue.add(Pair(j, d+1))
+                    }
+
+                }
+            }
+        }
+
+        BFS()
+
+        answer = countArray.count { it == max}
+
+        return answer
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
