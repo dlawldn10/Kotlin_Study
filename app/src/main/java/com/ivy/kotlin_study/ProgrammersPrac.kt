@@ -2296,47 +2296,50 @@ import kotlin.math.max
 // 10:22
 // 11:25
 // 완전탐색 BFS...
-class Solution {
-    fun solution(n: Int, edge: Array<IntArray>): Int {
-        var answer = 0
-        val adj = Array(n+1) { LinkedList<Int>() }
-        edge.forEach { (i, j) ->
-            adj[j].add(i)
-            adj[i].add(j)
-        }
-        val countArray = Array(n+1){ 0 }
-        var max = 0
+//class Solution {
+//    fun solution(n: Int, edge: Array<IntArray>): Int {
+//        var answer = 0
+//        val adj = Array(n+1) { LinkedList<Int>() }
+//        edge.forEach { (i, j) ->
+//            adj[j].add(i)
+//            adj[i].add(j)
+//        }
+//        val countArray = Array(n+1){ 0 }
+//        var max = 0
+//
+//        fun BFS(){
+//            // i(엣지), d
+//            val queue = LinkedList<Pair<Int, Int>>()
+//            val check = Array(n+1){ 0 }
+//            queue.add(Pair(1, 0))
+//            check[1] = 1
+//
+//            while (queue.isNotEmpty()){
+//                val (i, d) = queue.poll()
+//
+//                countArray[i] = d
+//                if (d > max) max = d
+//
+//                for (j in adj[i]){
+//                    if (check[j] == 0){
+//                        check[j] = 1
+//                        queue.add(Pair(j, d+1))
+//                    }
+//
+//                }
+//            }
+//        }
+//
+//        BFS()
+//
+//        answer = countArray.count { it == max}
+//
+//        return answer
+//    }
+//}
 
-        fun BFS(){
-            // i(엣지), d
-            val queue = LinkedList<Pair<Int, Int>>()
-            val check = Array(n+1){ 0 }
-            queue.add(Pair(1, 0))
-            check[1] = 1
 
-            while (queue.isNotEmpty()){
-                val (i, d) = queue.poll()
 
-                countArray[i] = d
-                if (d > max) max = d
-
-                for (j in adj[i]){
-                    if (check[j] == 0){
-                        check[j] = 1
-                        queue.add(Pair(j, d+1))
-                    }
-
-                }
-            }
-        }
-
-        BFS()
-
-        answer = countArray.count { it == max}
-
-        return answer
-    }
-}
 
 
 

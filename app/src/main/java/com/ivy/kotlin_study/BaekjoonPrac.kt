@@ -3,6 +3,10 @@ package com.ivy.kotlin_study
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.util.*
+import kotlin.math.floor
+import kotlin.math.max
+import kotlin.math.min
+import kotlin.math.sqrt
 
 
 // 13458 - 시험감독
@@ -667,89 +671,274 @@ import java.util.*
 // 8:00
 // --
 // 정답 코드
-fun main() {
-    val br = BufferedReader(InputStreamReader(System.`in`))
-    val n: Int = br.readLine().toInt()
-    for (i in 0 until n) {
-        val matchesCount: Int = br.readLine().toInt()
-        val minDp = LongArray(101)
+//fun main() {
+//    val br = BufferedReader(InputStreamReader(System.`in`))
+//    val n: Int = br.readLine().toInt()
+//    for (i in 0 until n) {
+//        val matchesCount: Int = br.readLine().toInt()
+//        val minDp = LongArray(101)
+//
+//
+//        //성냥 한개를 표현하는데 사용하는 개수는 2~7개 사이
+//        //2개 : 1, 3개 : 7, 4개 : 4, 5개 : 2,3,5, 6개 : 6,9,0, 7개 : 8
+//
+//        /*
+//		* mindp[i]는 i개의 성냥개비를 사용하여 만들 수 있는
+//		* 가장 작은 수를 저장하는 배열, 인덱스 2~8까지는 초기화 필요!
+//		*
+//		* 이때 mindp[6]으로 만들 수 있는 숫자는 0,6 두 가지가 있지만
+//		* 0은 첫번째 자리에 올 수 없으므로 mindp[6]은 6으로 초기화 한다.
+//		* 다른 숫자 뒤에 올 때는 6보다 작은 0을 사용한다.
+//		*/
+//        Arrays.fill(minDp, Long.MAX_VALUE)
+//        minDp[2] = 1
+//        minDp[3] = 7
+//        minDp[4] = 4
+//        minDp[5] = 2
+//        minDp[6] = 6
+//        minDp[7] = 8
+//        minDp[8] = 10
+//        val add = arrayOf("1", "7", "4", "2", "0", "8")
+//        /*
+//         * 성냥개비 9개로 만들 수 있는 가장 작은수를 구하기 위한 경우의 수에는
+//         * 2+7, 3+6, 4+5, 5+4, 6+3, 7+2가 있다.
+//         * 이때 1+8을 고려하지 않는 이유는 성냥개비 1개로 만들 수 있는 수는 없기 때문이다.
+//         * 이처럼 만들 수 없는 수인 1,0은 고려하지 않아야 한다.
+//         * 따라서 위에 적은 경우의 수를 모두 비교하여 가장 작은 수를 찾으면 된다.
+//         * 이때 주의해야할 점은 비교대상은 성냥개비로 만들어진 숫자이다.
+//         *
+//         * 점화식은 mindp[n]=(mindp[n-2]+addmin[2], mindp[n-3]+addmin[3], ..., mindp[n-7]+addmin[7])
+//         */
+//        for (j in 9..100) {
+//            for (k in 2..7) {
+//                val line = "" + minDp[j - k] + add[k - 2]
+//                minDp[j] = Math.min(line.toLong(), minDp[j])
+//            }
+//        }
+//
+//        /*
+//        * 큰 수는 1과 7만을 사용해서 만들 수 있다.
+//        * 성냥개비 8개를 사용해서 만들 수 있는 가장 큰 수는 1111
+//        * 성냥개비 9개를 사용해서 만들 수 있는 가장 큰 수는 711
+//        * 성냥개비 10개를 사용해서 만들 수 있는 가장 큰 수는 1111
+//        * 성냥개비 11개를 사용해서 만들 수 있는 가장 큰 수는 71111
+//        *
+//        * 즉, 큰 숫자를 만든다고 큰 수가 되는 것이 아닌 만드는데 성냥개비가 가장 적게드는 1을 사용하여
+//        * 가장 긴 자릿수를 만드는 것이 큰 수를 만드는 방법이다.
+//        * 이때 성냥개비의 갯수가 짝수일 경우는 만들어지는 1의 개수가 딱 떨어지지만
+//        * 홀수인 경우에는 성냥개비 1개로 만들 수 있는 수가 없기 때문에 3개로 만들 수 있는 7을 사용해야 한다.
+//        *
+//        * 따라서 큰 수는 1과 7만을 사용해서 만들 수 있다.
+//        */
+//        val max = StringBuilder()
+//        val a = (matchesCount / 2).toLong()
+//        val b = (matchesCount % 2).toLong()
+//        if (b == 1L) {
+//            max.append("7")
+//        } else {
+//            max.append("1")
+//        }
+//        for (j in 1 until a) {
+//            max.append("1")
+//        }
+//        println(minDp[matchesCount].toString() + " " + max.toString())
+//    }
+//}
 
 
-        //성냥 한개를 표현하는데 사용하는 개수는 2~7개 사이
-        //2개 : 1, 3개 : 7, 4개 : 4, 5개 : 2,3,5, 6개 : 6,9,0, 7개 : 8
 
-        /*
-		* mindp[i]는 i개의 성냥개비를 사용하여 만들 수 있는
-		* 가장 작은 수를 저장하는 배열, 인덱스 2~8까지는 초기화 필요!
-		*
-		* 이때 mindp[6]으로 만들 수 있는 숫자는 0,6 두 가지가 있지만
-		* 0은 첫번째 자리에 올 수 없으므로 mindp[6]은 6으로 초기화 한다.
-		* 다른 숫자 뒤에 올 때는 6보다 작은 0을 사용한다.
-		*/
-        Arrays.fill(minDp, Long.MAX_VALUE)
-        minDp[2] = 1
-        minDp[3] = 7
-        minDp[4] = 4
-        minDp[5] = 2
-        minDp[6] = 6
-        minDp[7] = 8
-        minDp[8] = 10
-        val add = arrayOf("1", "7", "4", "2", "0", "8")
-        /*
-         * 성냥개비 9개로 만들 수 있는 가장 작은수를 구하기 위한 경우의 수에는
-         * 2+7, 3+6, 4+5, 5+4, 6+3, 7+2가 있다.
-         * 이때 1+8을 고려하지 않는 이유는 성냥개비 1개로 만들 수 있는 수는 없기 때문이다.
-         * 이처럼 만들 수 없는 수인 1,0은 고려하지 않아야 한다.
-         * 따라서 위에 적은 경우의 수를 모두 비교하여 가장 작은 수를 찾으면 된다.
-         * 이때 주의해야할 점은 비교대상은 성냥개비로 만들어진 숫자이다.
-         *
-         * 점화식은 mindp[n]=(mindp[n-2]+addmin[2], mindp[n-3]+addmin[3], ..., mindp[n-7]+addmin[7])
-         */
-        for (j in 9..100) {
-            for (k in 2..7) {
-                val line = "" + minDp[j - k] + add[k - 2]
-                minDp[j] = Math.min(line.toLong(), minDp[j])
-            }
-        }
+// 2343 - 기타 레슨
+// 4:43
+// 5:19
+//fun main(){
+//    val sc = Scanner(System.`in`)
+//    val N = sc.nextInt()
+//    val M = sc.nextInt()
+//    val blueray = Array(N){ 0 }
+//    for (i in 0 until N){
+//        blueray[i] = sc.nextInt()
+//    }
+//
+//    fun isPossible(x: Int): Boolean{
+//        // x길이의 3 덩어리로 나눠서 넣을 수 있는지 검사
+//        var count = 1
+//        var acc = 0
+//        for (i in blueray.indices){
+//            if(acc + blueray[i] > x){
+//                count++
+//                acc = blueray[i]
+//            }else{
+//                acc += blueray[i]
+//            }
+//        }
+//
+//        return count <= M
+//    }
+//
+//
+//    var l = blueray.max()
+//    var r = blueray.sum()
+//    while (l <= r){
+//        val mid: Int = (l+r)/2
+//
+//        if (isPossible(mid)){
+//            r = mid - 1
+//        }else{
+//            l = mid + 1
+//        }
+//    }
+//
+//    println(l)
+//
+//
+//    // 이렇게 해도 답이 같다.
+////    while (l < r){
+////        val mid: Int = (l+r)/2
+////
+////        if (isPossible(mid)){
+////            r = mid
+////        }else{
+////            l = mid + 1
+////        }
+////    }
+////
+////    println(l)
+//
+//}
 
-        /*
-        * 큰 수는 1과 7만을 사용해서 만들 수 있다.
-        * 성냥개비 8개를 사용해서 만들 수 있는 가장 큰 수는 1111
-        * 성냥개비 9개를 사용해서 만들 수 있는 가장 큰 수는 711
-        * 성냥개비 10개를 사용해서 만들 수 있는 가장 큰 수는 1111
-        * 성냥개비 11개를 사용해서 만들 수 있는 가장 큰 수는 71111
-        *
-        * 즉, 큰 숫자를 만든다고 큰 수가 되는 것이 아닌 만드는데 성냥개비가 가장 적게드는 1을 사용하여
-        * 가장 긴 자릿수를 만드는 것이 큰 수를 만드는 방법이다.
-        * 이때 성냥개비의 갯수가 짝수일 경우는 만들어지는 1의 개수가 딱 떨어지지만
-        * 홀수인 경우에는 성냥개비 1개로 만들 수 있는 수가 없기 때문에 3개로 만들 수 있는 7을 사용해야 한다.
-        *
-        * 따라서 큰 수는 1과 7만을 사용해서 만들 수 있다.
-        */
-        val max = StringBuilder()
-        val a = (matchesCount / 2).toLong()
-        val b = (matchesCount % 2).toLong()
-        if (b == 1L) {
-            max.append("7")
-        } else {
-            max.append("1")
-        }
-        for (j in 1 until a) {
-            max.append("1")
-        }
-        println(minDp[matchesCount].toString() + " " + max.toString())
-    }
+
+
+// <이분탐색>
+// - lowerBound 찾기
+// 1)
+// while(l < r)
+// r = mid
+// l = mid + 1
+// println(l)
+
+// 2)
+// while(l <= r)
+// r = mid - 1
+// l = mid + 1
+// println(l)
+
+// - upperBound 찾기
+// 1)
+// while(l < r)
+// r = mid - 1
+// l = mid
+// println(r)
+
+// 2)
+// while(l <= r)
+// r = mid - 1
+// l = mid + 1
+// println(r)
+
+
+
+// 1699 - 제곱수의 합
+// 5:38
+// 6:29
+//fun main(){
+//    val sc = Scanner(System.`in`)
+//    val N = sc.nextInt()
+//    val dp = Array(N+3){Int.MAX_VALUE}
+//    dp[1] = 1
+//    dp[2] = 2
+//    dp[3] = 3
+//
+//    for (n in 4..N){
+//        // 제곱수인지 판별하기
+//        if (sqrt(n.toDouble()) % 1.0 == 0.0){
+//            dp[n] = 1
+//            continue
+//        }
+//        // 최소값을 찾아 갱신하기
+//        for (i in 1..n){
+//            if (n < i*i) break
+//            dp[n] = min(dp[n], 1 + dp[n-i*i])
+//        }
+//    }
+//
+//    //println(dp.contentToString())
+//    println(dp[N])
+//}
+
+
+// 11055 - 가장 큰 증가 부분 수열
+// 7:28
+// --
+// 시간초과
+//fun main(){
+//    val sc = Scanner(System.`in`)
+//    val N = sc.nextInt()
+//    val A = Array(N){ 0 }
+//    for (i in 0 until N){
+//        A[i] = sc.nextInt()
+//    }
+//
+//    val check = Array(N){ 0 }
+//    var max = 0
+//
+//    fun DFS(i: Int, sum: Int){
+//
+//        max = max(sum, max)
+//
+//        for (j in i until N){
+//            if (check[j] == 0 && A[j] > A[i]){
+//                check[i]
+//                DFS(j, sum+A[j])
+//                check[i] = 0
+//            }
+//        }
+//    }
+//
+//    for (i in 0 until N){
+//        DFS(i, A[i])
+//    }
+//
+//    println(max)
+//
+//
+//}
+
+// DP 풀이
+//fun main(){
+//    val sc = Scanner(System.`in`)
+//    val N = sc.nextInt()
+//    val A = Array(N){ 0 }
+//    for (i in 0 until N){
+//        A[i] = sc.nextInt()
+//    }
+//    val dp = Array(N){ 0 }
+//    dp[0] = A[0]
+//
+//    for (i in 1 until N){
+//        // 앞에걸 모두 보는데
+//        for (j in 0 until i){
+//            // 나보다 작은 것만 보고 가장 큰 걸 구한다.
+//            if (A[j] < A[i]){
+//                dp[i] = max(dp[i], dp[j])
+//            }
+//        }
+//        //구한 수에다가 나를 더해서 나의 값을 갱신한다.
+//        dp[i] += A[i]
+//    }
+//
+//    println(dp.max())
+//
+//}
+
+
+
+// 1018 - 체스판 다시 칠하기
+fun main(){
+    val sc = Scanner(System.`in`)
+    val N = sc.nextInt()
+    val M = sc.nextInt()
+
 }
-
-
-
-
-
-
-
-
-
-
 
 
 
