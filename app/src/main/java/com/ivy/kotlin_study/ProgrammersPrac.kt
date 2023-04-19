@@ -2339,8 +2339,13 @@ import kotlin.math.max
 //}
 
 
-
-
+// 다음에 올 숫자 - lv0
+class Solution {
+    fun solution(common: IntArray): Int {
+        if (common[1] - common[0] == common [2] - common[1]) return common[common.lastIndex] + (common [2] - common[1])
+        else return common[common.lastIndex] * (common [2] / common[1])
+    }
+}
 
 
 
