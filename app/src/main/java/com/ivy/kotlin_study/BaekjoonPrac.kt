@@ -3,6 +3,7 @@ package com.ivy.kotlin_study
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.floor
 import kotlin.math.max
 import kotlin.math.min
@@ -933,12 +934,45 @@ import kotlin.math.sqrt
 
 
 // 1018 - 체스판 다시 칠하기
-fun main(){
-    val sc = Scanner(System.`in`)
-    val N = sc.nextInt()
-    val M = sc.nextInt()
-
-}
+// 완탐 방법
+//fun main(){
+//    val sc = Scanner(System.`in`)
+//    val N = sc.nextInt()
+//    val M = sc.nextInt()
+//    var answer = Int.MAX_VALUE
+//    val adj = arrayListOf<String>()
+//    for (i in 0 until N){
+//        adj.add(sc.next())
+//    }
+//
+//    fun fill(bw: Char, y: Int, x: Int){
+//        var count = 0
+//        for (i in 0 until 8){
+//            for (j in 0 until 8){
+//                if ((i+j) % 2 == 0){
+//                    if (adj[y+i][x+j] != bw){
+//                        count++
+//                    }
+//                }else{
+//                    if (adj[y+i][x+j] == bw){
+//                        count++
+//                    }
+//                }
+//            }
+//        }
+//        answer = min(answer,  count)
+//    }
+//
+//    for(i in 0..N-8){
+//        for (j in 0..M-8){
+//            fill('B', i, j)
+//            fill('W', i, j)
+//        }
+//    }
+//
+//    println(answer)
+//
+//}
 
 
 

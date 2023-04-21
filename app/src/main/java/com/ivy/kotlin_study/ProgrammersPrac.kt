@@ -3,6 +3,7 @@ package com.ivy.kotlin_study
 import java.util.*
 import kotlin.math.abs
 import kotlin.math.max
+import kotlin.math.sqrt
 
 
 //fun solution(numbers: IntArray): Double {
@@ -2351,34 +2352,34 @@ import kotlin.math.max
 // 소수 만들기 - lv1
 // 11:05
 // 11:19
-class Solution {
-    fun solution(nums: IntArray): Int {
-        var answer = 0
-        
-        fun isSosu(num: Int): Boolean{
-            var i = 2
-            while(i <= sqrt(num.toDouble()).toInt()){
-                if (num % i == 0){
-                    return false
-                }
-                i++
-            }
-            return true
-        }
- 
-        for(i in 0 until nums.size){
-            for(j in i+1 until nums.size){
-                for(k in j+1 until nums.size){
-                    if(isSosu(nums[i]+nums[j]+nums[k])){
-                        answer++
-                    }
-                }
-            }
-        }
-
-        return answer
-    }
-}
+//class Solution {
+//    fun solution(nums: IntArray): Int {
+//        var answer = 0
+//
+//        fun isSosu(num: Int): Boolean{
+//            var i = 2
+//            while(i <= sqrt(num.toDouble()).toInt()){
+//                if (num % i == 0){
+//                    return false
+//                }
+//                i++
+//            }
+//            return true
+//        }
+//
+//        for(i in 0 until nums.size){
+//            for(j in i+1 until nums.size){
+//                for(k in j+1 until nums.size){
+//                    if(isSosu(nums[i]+nums[j]+nums[k])){
+//                        answer++
+//                    }
+//                }
+//            }
+//        }
+//
+//        return answer
+//    }
+//}
 
 
 
