@@ -2383,7 +2383,32 @@ import kotlin.math.sqrt
 
 
 
+// 달리기 경주 - lv1
+class Solution {
+    fun solution(players: Array<String>, callings: Array<String>): Array<String> {
+        val newPlayers = players
+        var tmp = mutableMapOf<String, Int>()
+        for(i in 0 until players.size){
+            tmp.put(players[i], i)
+        }
 
+        // 이름, 등수
+        for(name in callings){
+            // 외친 사람의 등수
+            val idx = tmp[name]!!
+            // 이전 사람의 이름
+            val preName = newPlayers[idx-1]!!
+
+            tmp.put(preName, idx)
+            tmp.put(name, idx-1)
+
+            newPlayers[idx] = preName
+            newPlayers[idx-1] = name
+        }
+
+        return newPlayers
+    }
+}
 
 
 
