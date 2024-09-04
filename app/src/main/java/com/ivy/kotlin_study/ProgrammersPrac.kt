@@ -1,10 +1,5 @@
 package com.ivy.kotlin_study
 
-import java.util.*
-import kotlin.math.abs
-import kotlin.math.max
-import kotlin.math.sqrt
-
 
 //fun solution(numbers: IntArray): Double {
 //    return numbers.average()
@@ -2384,34 +2379,71 @@ import kotlin.math.sqrt
 
 
 // 달리기 경주 - lv1
-class Solution {
-    fun solution(players: Array<String>, callings: Array<String>): Array<String> {
-        val newPlayers = players
-        var tmp = mutableMapOf<String, Int>()
-        for(i in 0 until players.size){
-            tmp.put(players[i], i)
-        }
+//class Solution {
+//    fun solution(players: Array<String>, callings: Array<String>): Array<String> {
+//        val newPlayers = players
+//        var tmp = mutableMapOf<String, Int>()
+//        for(i in 0 until players.size){
+//            tmp.put(players[i], i)
+//        }
+//
+//        // 이름, 등수
+//        for(name in callings){
+//            // 외친 사람의 등수
+//            val idx = tmp[name]!!
+//            // 이전 사람의 이름
+//            val preName = newPlayers[idx-1]!!
+//
+//            tmp.put(preName, idx)
+//            tmp.put(name, idx-1)
+//
+//            newPlayers[idx] = preName
+//            newPlayers[idx-1] = name
+//        }
+//
+//        return newPlayers
+//    }
+//}
 
-        // 이름, 등수
-        for(name in callings){
-            // 외친 사람의 등수
-            val idx = tmp[name]!!
-            // 이전 사람의 이름
-            val preName = newPlayers[idx-1]!!
 
-            tmp.put(preName, idx)
-            tmp.put(name, idx-1)
+// 직사각형 넓이 구하기 - lv.0
+//class Solution {
+//    fun solution(dots: Array<IntArray>): Int {
+//        val xSet = dots.map { it[0] }.toSortedSet()
+//        val ySet = dots.map {it[1] }.toSortedSet()
+//
+//        return (xSet.last() - xSet.first()) * (ySet.last() - ySet.first())
+//    }
+//
+//    // 다른 풀이
+////    fun solution(dots: Array<IntArray>): Int =
+////        dots.sortedWith(compareBy<IntArray> { it[0] }.thenBy { it[1] })
+////            .let { (A, _, _, B) ->
+////                (B[0] - A[0]) * (B[1] - A[1])
+////            }
+//}
 
-            newPlayers[idx] = preName
-            newPlayers[idx-1] = name
-        }
 
-        return newPlayers
-    }
-}
-
-
-
+// 다항식 더하기 - lv.0
+//class Solution {
+//    fun solution(polynomial: String): String {
+//        var xSum = 0
+//        var other = 0
+//        val splitPoly = polynomial.split(" + ")
+//        splitPoly.forEach {
+//            if (it.last() == 'x') {
+//                xSum += if (it.first() == 'x'){
+//                    1
+//                }else{
+//                    it.slice(0..it.length-2).toInt()
+//                }
+//            }else{
+//                other += it.toInt()
+//            }
+//        }
+//        return (if (xSum == 0) "" else if(xSum == 1) "x" else "${xSum}x") + (if (xSum == 0 || other == 0) "" else " + ") + (if (other > 0) "$other" else "")
+//    }
+//}
 
 
 
