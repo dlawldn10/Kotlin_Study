@@ -2445,7 +2445,41 @@ package com.ivy.kotlin_study
 //    }
 //}
 
+// 안전지대 - lv.0
+class Solution {
+    fun solution(board: Array<IntArray>): Int {
+        val bombList = arrayListOf<IntArray>()
+        var count = 0
+        // 위험지역 좌표를 모두 구하고 리스트에 넣기
+        board.forEachIndexed { i, x ->
+            x.forEachIndexed { j, y ->
+                if (y == 1) {
+                    bombList.add(intArrayOf(i, j))
 
+                    bombList.add(intArrayOf(i+1, j+1))
+                    bombList.add(intArrayOf(i, j+1))
+                    bombList.add(intArrayOf(i-1, j+1))
+                    bombList.add(intArrayOf(i-1, j))
+                    bombList.add(intArrayOf(i-1, j-1))
+                    bombList.add(intArrayOf(i, j-1))
+                    bombList.add(intArrayOf(i+1, j-1))
+                    bombList.add(intArrayOf(i+1, j))
+                }
+            }
+        }
+        val b = bombList.distinctBy { Pair(it[0], it[1]) }
+        b.forEach { pair ->
+            val (x, y) = pair
+            if (x < board.size && x >= 0 && y < board.size && y >= 0) {
+                println("( $x , $y )")
+                count += 1
+            }
+        }
+
+        val result = board.size * board.size - count
+        return if (result < 0) 0 else result
+    }
+}
 
 
 
