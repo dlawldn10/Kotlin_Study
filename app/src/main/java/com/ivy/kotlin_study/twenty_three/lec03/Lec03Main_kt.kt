@@ -1,5 +1,7 @@
 package com.ivy.kotlin_study.lec03
 
+import com.ivy.kotlin_study.twenty_three.lec03.Person
+
 // Lec03 코틀린에서 Type을 다루는 방법
 
 class Lec03Main_kt {

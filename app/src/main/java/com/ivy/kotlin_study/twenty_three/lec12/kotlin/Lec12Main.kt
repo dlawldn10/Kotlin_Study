@@ -1,6 +1,6 @@
 package com.ivy.kotlin_study.lec12.kotlin
 
-import com.ivy.kotlin_study.lec12.java.Movable
+import com.ivy.kotlin_study.twenty_three.lec12.java.Movable
 
 // Lec12 코틀린에서 object 키워드를 다루는 방법
 // 자바에서는 없는 object 코드

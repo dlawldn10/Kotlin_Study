@@ -1,5 +1,7 @@
 package com.ivy.kotlin_study.lec17
 
+import com.ivy.kotlin_study.twenty_three.lec17.Fruit
+
 // Lec17. 코틀린에서 람다(익명 함수)를 다루는 방법
 // 1. 자바에서 람다를 다루기 위한 노력
 // 2. 코틀린에서의 람다

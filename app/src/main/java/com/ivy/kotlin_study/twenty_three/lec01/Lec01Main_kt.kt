@@ -1,5 +1,7 @@
 package com.ivy.kotlin_study.lec01
 
+import com.ivy.kotlin_study.twenty_three.lec01.Person
+
 // Java에서
 // long = 가변, final long = 불변
 // kotlin에서

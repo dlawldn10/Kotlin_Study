@@ -1,5 +1,5 @@
 package com.ivy.kotlin_study.lec13
-import com.ivy.kotlin_study.lec13.JavaHouse.LivingRoom
+import com.ivy.kotlin_study.twenty_three.lec13.JavaHouse.LivingRoom
 
 // Lec13. 코틀린에서 중첩 클래스를 다루는 방법
 

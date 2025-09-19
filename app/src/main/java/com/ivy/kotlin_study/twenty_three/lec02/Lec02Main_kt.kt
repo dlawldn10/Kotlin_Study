@@ -1,5 +1,7 @@
 package com.ivy.kotlin_study.lec02
 
+import com.ivy.kotlin_study.twenty_three.lec02.Person
+
 
 // Lec02 코틀린에서 null을 다루는 방법
 

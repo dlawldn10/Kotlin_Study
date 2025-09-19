@@ -1,5 +1,7 @@
 package com.ivy.kotlin_study.lec16
 
+import com.ivy.kotlin_study.twenty_three.lec16.Person
+
 // Lec16 코틀린에서 다양한 함수를 다루는 방법
 // 1. 확장 함수
 // 2. infix 함수
