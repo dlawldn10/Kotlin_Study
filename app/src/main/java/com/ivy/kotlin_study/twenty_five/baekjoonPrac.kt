@@ -1,6 +1,7 @@
 package com.ivy.kotlin_study.twenty_five
 
 import androidx.collection.arraySetOf
+import java.util.ArrayDeque
 
 
 // 2557
@@ -278,4 +279,43 @@ import androidx.collection.arraySetOf
 //    }
 //    sb.append("int")
 //    println(sb)
+//}
+
+
+// 11866
+//fun main() {
+//    val (n, k) = readln().split(" ").map { it.toInt() }
+//    val queue = ArrayDeque<Int>()
+//    val result = mutableListOf<Int>()
+//
+//    for (i in 1..n) {
+//        queue.add(i)
+//    }
+//
+//    var counter = 1
+//    while (queue.isNotEmpty()) {
+//        if (counter == k) {
+//            result.add(queue.poll())
+//            counter = 1
+//        } else {
+//            queue.add(queue.poll())
+//            counter += 1
+//        }
+//    }
+//    println("<" + result.joinToString(", ") + ">")
+//}
+
+// 10813
+//fun main() {
+//    val (n, m) = readln().split(" ").map { it.toInt() }
+//    val list = IntArray(n) { it+1 }
+//    repeat(m) {
+//        val (i, j) = readln().split(" ").map { it.toInt() }
+//        if (i != j) {
+//            val tmp = list[i-1]
+//            list[i-1] = list[j-1]
+//            list[j-1] = tmp
+//        }
+//    }
+//    println(list.joinToString(" "))
 //}
