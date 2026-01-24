@@ -319,3 +319,56 @@ import java.util.ArrayDeque
 //    }
 //    println(list.joinToString(" "))
 //}
+
+// 5597
+//fun main() {
+//    val submitted = BooleanArray(31)
+//
+//    repeat(28) {
+//        val x = readln().toInt()
+//        submitted[x] = true
+//    }
+//
+//    for (i in 1..30) {
+//        if (!submitted[i]) println(i)
+//    }
+//}
+
+// 10811
+//fun main() {
+//    val (n, m) = readLine()!!.split(" ").map { it.toInt() }
+//    val arr = IntArray(n + 1) { it } // 1..n
+//
+//    repeat(m) {
+//        val (i, j) = readLine()!!.split(" ").map { it.toInt() }
+//        var l = i
+//        var r = j
+//        while (l < r) {
+//            val tmp = arr[l]
+//            arr[l] = arr[r]
+//            arr[r] = tmp
+//            l++
+//            r--
+//        }
+//    }
+//
+//    val sb = StringBuilder()
+//    for (i in 1..n) {
+//        if (i > 1) sb.append(' ')
+//        sb.append(arr[i])
+//    }
+//    print(sb.toString())
+//}
+
+
+// 1546
+//fun main() {
+//    val n = readln().toInt()
+//    val list = readln().split(" ").map { it.toFloat() }
+//    val max = list.max()
+//    var sum: Float = 0f
+//    for (score in list) {
+//        sum += score/max*100
+//    }
+//    println(sum/n)
+//}
