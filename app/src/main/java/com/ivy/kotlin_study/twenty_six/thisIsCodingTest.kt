@@ -1,6 +1,7 @@
 package com.ivy.kotlin_study.twenty_six
 
 import androidx.core.text.isDigitsOnly
+import java.util.Stack
 import kotlin.contracts.contract
 
 
@@ -286,4 +287,88 @@ import kotlin.contracts.contract
 //        }
 //
 //    println((numStr.joinToString("")+sum))
+//}
+
+// 이코테: 음료수 얼려먹기
+// 반복문 풀이
+//import java.util.ArrayDeque
+//fun main() {
+//    val (n, m) = readln().split(" ").map { it.toInt() }
+//    val graph = Array(n) { readln().map { it - '0' }.toIntArray() }
+//
+//    var result = 0
+//
+//    val dx = intArrayOf(-1, 1, 0, 0)
+//    val dy = intArrayOf(0, 0, -1, 1)
+//
+//    for (x in 0 until n) {
+//        for (y in 0 until m) {
+//            if (graph[x][y] == 0) {
+//                result++
+//
+//                val stack = ArrayDeque<Pair<Int, Int>>()
+//                stack.addLast(x to y)
+//                graph[x][y] = 1
+//
+//                while (stack.isNotEmpty()) {
+//                    val (cx, cy) = stack.removeLast()
+//
+//                    for (i in 0 until 4) {
+//                        val nx = cx + dx[i]
+//                        val ny = cy + dy[i]
+//
+//                        if (nx in 0 until n && ny in 0 until m && graph[nx][ny] == 0) {
+//                            graph[nx][ny] = 1
+//                            stack.addLast(nx to ny)
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    println(result)
+//}
+
+// 재귀함수 풀이
+//fun main() {
+//    val input = readln().split(" ").map { it.toInt() }
+//
+//    lateinit var graph: Array<IntArray>
+//    var n = 0
+//    var m = 0
+//
+//    val dx = intArrayOf(-1, 1, 0, 0)
+//    val dy = intArrayOf(0, 0, -1, 1)
+//
+//    fun dfs(x: Int, y: Int) {
+//        graph[x][y] = 1
+//
+//        for (i in 0 until 4) {
+//            val nx = x + dx[i]
+//            val ny = y + dy[i]
+//
+//            if (nx in 0 until n && ny in 0 until m && graph[nx][ny] == 0) {
+//                dfs(nx, ny)
+//            }
+//        }
+//    }
+//
+//    n = input[0]
+//    m = input[1]
+//
+//    graph = Array(n) { readln().map { it - '0' }.toIntArray() }
+//
+//    var result = 0
+//
+//    for (x in 0 until n) {
+//        for (y in 0 until m) {
+//            if (graph[x][y] == 0) {
+//                dfs(x, y)
+//                result++
+//            }
+//        }
+//    }
+//
+//    println(result)
 //}
