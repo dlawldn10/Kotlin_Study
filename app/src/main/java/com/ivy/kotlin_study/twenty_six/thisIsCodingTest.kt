@@ -1,6 +1,7 @@
 package com.ivy.kotlin_study.twenty_six
 
 import androidx.core.text.isDigitsOnly
+import java.util.Queue
 import java.util.Stack
 import kotlin.contracts.contract
 
@@ -371,4 +372,42 @@ import kotlin.contracts.contract
 //    }
 //
 //    println(result)
+//}
+
+// 이코테: 미로탈출
+// 정답 ->
+//fun main() {
+//    val (n, m) = readln().split(" ").map { it.toInt() }
+//
+//    val graph = Array(n) { readln().map { it - '0' }.toIntArray() }
+//
+//    val dx = intArrayOf(0,0, 1, -1)
+//    val dy = intArrayOf(1, -1, 0, 0)
+//
+//    fun bfs(x: Int, y: Int): Int {
+//        val queue = ArrayDeque<Pair<Int, Int>>()
+//        queue.addLast(Pair(x, y))
+//
+//        while (queue.isNotEmpty()) {
+//            val (cx, cy) = queue.removeFirst()
+//
+//            for (i in 0 until 4) {
+//                val nx = dx[i] + cx
+//                val ny = dy[i] + cy
+//
+//                if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue
+//
+//                if (graph[nx][ny] == 1) {
+//                    graph[nx][ny] = graph[cx][cy] + 1
+//                    queue.addLast(Pair(nx, ny))
+//                }
+//            }
+//        }
+//
+//        return graph[n-1][m-1]
+//    }
+//
+//
+//    println(bfs(0, 0))
+//
 //}
